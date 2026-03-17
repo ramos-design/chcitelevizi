@@ -141,7 +141,6 @@ h1 em { font-style: italic; color: var(--accent); }
   display: flex; flex-wrap: wrap; gap: 2.5rem; margin-top: 4rem;
   animation: fadeUp .8s .4s ease both;
 }
-.stat { }
 .stat-num {
   font-family: 'Fraunces', serif;
   font-size: 2.2rem; font-weight: 700;
@@ -363,20 +362,33 @@ section { padding: 100px 6vw; }
 
 /* ── PORADENSTVO ── */
 #poradenstvi {
-  background: var(--white);
+  background: #0d0d0d;
+  color: var(--white);
   display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center;
+  padding-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+#poradenstvi::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 60% at 10% 50%, rgba(26,58,92,.18) 0%, transparent 65%);
+  pointer-events: none;
 }
 .advisory-visual {
   position: relative;
 }
 .advisory-card {
-  background: var(--black); color: var(--white);
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  color: var(--white);
   border-radius: 24px; padding: 2.5rem; position: relative; overflow: hidden;
+  z-index: 1;
 }
 .advisory-card-bg {
   position: absolute; top: -40px; right: -40px;
   width: 200px; height: 200px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,92,46,.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(232,92,46,.15) 0%, transparent 70%);
 }
 .advisory-cards-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
 .adv-item {
@@ -395,11 +407,13 @@ section { padding: 100px 6vw; }
   padding: 3px 10px; border-radius: 100px;
 }
 
-.advisory-content .section-desc { margin-bottom: 2rem; }
+.advisory-content .section-title { color: #fff; }
+.advisory-content .section-desc { color: rgba(255,255,255,.45); margin-bottom: 2rem; }
 .check-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
 .check-list li {
   display: flex; align-items: flex-start; gap: .8rem;
   font-size: .95rem; line-height: 1.6;
+  color: rgba(255,255,255,.65);
 }
 .check-list li::before {
   content: '✓'; min-width: 26px; height: 26px;
@@ -409,20 +423,35 @@ section { padding: 100px 6vw; }
 }
 
 /* ── RECENZE ── */
-#recenze { background: var(--cream); }
+#recenze {
+  background: #0d0d0d;
+  color: #fff;
+  padding-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+#recenze::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(26,58,92,.12) 0%, transparent 80%);
+  pointer-events: none;
+}
+#recenze .section-title { color: #fff; }
+#recenze .section-desc { color: rgba(255,255,255,.4); }
 .reviews-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem; margin-top: 4rem;
 }
 .review-card {
-  background: var(--card-bg); border-radius: 20px;
-  padding: 2rem; border: 1.5px solid var(--border);
+  background: rgba(255,255,255,.04); border-radius: 20px;
+  padding: 2rem; border: 1px solid rgba(255,255,255,.08);
   transition: transform .3s, box-shadow .3s;
 }
-.review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.review-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.06); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
 .review-stars { color: #f59e0b; font-size: 1rem; margin-bottom: 1rem; }
 .review-text {
-  font-size: .95rem; line-height: 1.75; color: #333;
+  font-size: .95rem; line-height: 1.75; color: rgba(255,255,255,.55);
   font-style: italic; margin-bottom: 1.5rem;
 }
 .review-author { display: flex; align-items: center; gap: .8rem; }
@@ -431,8 +460,8 @@ section { padding: 100px 6vw; }
   background: var(--accent2); display: flex; align-items: center; justify-content: center;
   font-family: 'Fraunces', serif; font-weight: 700; color: #fff; font-size: .9rem;
 }
-.review-name { font-weight: 600; font-size: .9rem; }
-.review-location { font-size: .8rem; color: var(--mid); }
+.review-name { font-weight: 600; font-size: .9rem; color: #fff; }
+.review-location { font-size: .8rem; color: rgba(255,255,255,.3); }
 .review-card:nth-child(2) .review-avatar { background: var(--accent); }
 .review-card:nth-child(3) .review-avatar { background: #5b21b6; }
 .review-card:nth-child(4) .review-avatar { background: #0d9488; }
@@ -674,7 +703,7 @@ footer {
 
 <!-- JAK TO FUNGUJE -->
 <section id="jak-to-funguje">
-  <div class="reveal">
+  <div class="section-header reveal">
     <div class="section-tag">Proces</div>
     <h2 class="section-title">Jak probíhá<br><em>celý proces?</em></h2>
     <p class="section-desc">Od první objednávky až po dokonalý obraz – zajistíme vše za vás. Jednoduchý, transparentní a rychlý postup.</p>
@@ -747,7 +776,7 @@ footer {
 <section id="tarify">
   <div class="reveal">
     <div class="section-tag">Ceník</div>
-    <h2 class="section-title">Vyberte si <em>svůj tarif</em></h2>
+    <h2 class="section-title">Vyberte si <em>službu</em></h2>
     <p class="section-desc">Tři balíčky navržené tak, aby vyhověly různým potřebám – od jednoduchého nastavení až po komplexní řešení pro náročné.</p>
   </div>
   <div class="pricing-grid reveal">
@@ -864,15 +893,15 @@ footer {
   <div class="advisory-content reveal">
     <div class="section-tag">Poradenství</div>
     <h2 class="section-title">Nevíte jakou<br>televizi <em>vybrat?</em></h2>
-    <p class="section-desc">Naši specialisté vám bezplatně poradí s výběrem televizoru ještě před samotnou instalací. Posoudíme vaši místnost, potřeby i rozpočet.</p>
+    <p class="section-desc">Využijte našeho <strong>bezplatného chytrého průvodce</strong> v klientské sekci, který vás provede světem technologií. Pokud si i po jeho doporučení nebudete vědět rady, naši specialisté vám poskytnou <strong>živou podporu</strong> pro finální výběr.</p>
     <ul class="check-list">
-      <li>Osobní konzultace přímo u vás nebo online videohovor</li>
-      <li>Doporučení konkrétních modelů televizorů pro váš případ</li>
-      <li>Porovnání technologií displeje a jejich výhod</li>
-      <li>Poradenství ohledně příslušenství – soundbary, nástěnné držáky, kabely</li>
-      <li>Nezávislý názor bez vazby na konkrétní prodejce či značky</li>
+      <li>Exkluzivní přístup k interaktivnímu průvodci výběrem</li>
+      <li>Automatické vyhodnocení parametrů vaší místnosti a rozpočtu</li>
+      <li>Okamžité srovnání aktuálně nejlepších modelů na trhu</li>
+      <li>Živá konzultace s expertem pro ty, co stále tápou</li>
+      <li>Nezávislé poradenství bez vazby na prodejce či značky</li>
     </ul>
-    <a href="#kontakt" class="btn-primary" style="margin-top:2rem;display:inline-block">Chci poradenství zdarma →</a>
+    <a href="#kontakt" class="btn-primary" style="margin-top:2rem;display:inline-block">Spustit chytrého průvodce →</a>
   </div>
 </section>
 
@@ -1300,47 +1329,19 @@ footer {
       </div>
     </div>
   </div>
-  <div class="contact-form reveal">
-    <div class="form-title">Nezávazná objednávka</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Jméno a příjmení</label>
-        <input type="text" class="form-control" placeholder="Jan Novák">
-      </div>
-      <div class="form-group">
-        <label>Telefon</label>
-        <input type="tel" class="form-control" placeholder="+420 777 000 000">
-      </div>
+  <div class="auth-cta-box reveal">
+    <div class="auth-cta-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="8.5" cy="7" r="4"></circle>
+        <line x1="20" y1="8" x2="20" y2="14"></line>
+        <line x1="23" y1="11" x2="17" y2="11"></line>
+      </svg>
     </div>
-    <div class="form-group">
-      <label>E-mail</label>
-      <input type="email" class="form-control" placeholder="jan@example.cz">
-    </div>
-    <div class="form-group">
-      <label>Adresa (Praha)</label>
-      <input type="text" class="form-control" placeholder="Ulice, číslo, Praha X">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Tarif</label>
-        <select class="form-control">
-          <option value="">Vyberte tarif</option>
-          <option>Basic – od 999 Kč</option>
-          <option>Standard – od 1 899 Kč</option>
-          <option>Exclusive – od 3 499 Kč</option>
-          <option>Pouze poradenství (zdarma)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Preferovaný termín</label>
-        <input type="date" class="form-control">
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Poznámka (volitelné)</label>
-      <input type="text" class="form-control" placeholder="Typ TV, zvláštní požadavky...">
-    </div>
-    <button class="form-submit" onclick="handleSubmit(this)">Odeslat objednávku →</button>
+    <div class="auth-cta-title">Vstupte do klientské zóny</div>
+    <p class="auth-cta-desc">Zde naleznete svého <strong>chytrého průvodce</strong>, který vás provede výběrem, a následně si můžete objednat instalaci na míru.</p>
+    <a href="/auth" class="auth-cta-btn">Přihlásit se / Registrovat →</a>
+    <span class="auth-cta-note">Rychlá registrace přes E-mail nebo Google</span>
   </div>
 </section>
 
