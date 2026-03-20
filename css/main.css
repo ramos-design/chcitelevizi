@@ -343,6 +343,12 @@ section { padding: 110px 5vw; }
 .hero-top h1 {
   text-align: center;
   max-width: 980px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-top .hero-chips {
+  justify-content: center;
+  margin-top: 0;
 }
 
 .hero-split {

@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     heroVisual.innerHTML = `
       <figure class="hero-photo-frame">
         <img
-          src="https://images.pexels.com/photos/6782568/pexels-photo-6782568.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop"
-          alt="Technik instaluje televizi na stenu v obyvacim pokoji"
+          src="https://images.pexels.com/photos/34153693/pexels-photo-34153693.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop"
+          alt="Moderní domácí kino s velkým TV a reproduktory v obývacím pokoji"
           class="hero-photo"
           loading="eager"
           decoding="async"
@@ -110,86 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (badge) heroTop.appendChild(badge);
     if (title) heroTop.appendChild(title);
+    if (chips) heroTop.appendChild(chips);
 
     if (proof) heroInfo.appendChild(proof);
     if (sub) heroInfo.appendChild(sub);
     if (actions) heroInfo.appendChild(actions);
 
-    const orbitChips = document.createElement('div');
-    orbitChips.className = 'hero-orbit-chips';
+    // Chips now positioned after heading in HTML, no need to move them to orbit
 
-    const chipItems = chips
-      ? Array.from(chips.querySelectorAll('.hero-chip'))
-      : [];
-
-    const fallbackChipMarkup = [
-      '<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Montaz na zed',
-      '<svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg> Pripojeni k Wi-Fi',
-      '<svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> Netflix, YouTube a dalsi',
-      '<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg> Zaruka spokojenosti',
-    ];
-
-    const sourceMarkup = chipItems.length
-      ? chipItems.slice(0, 4).map((chip) => chip.innerHTML)
-      : fallbackChipMarkup;
-
-    const photoVariants = [
-      'https://images.pexels.com/photos/6782568/pexels-photo-6782568.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop',
-      'https://images.pexels.com/photos/7031408/pexels-photo-7031408.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop',
-      'https://images.pexels.com/photos/6585608/pexels-photo-6585608.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop',
-      'https://images.pexels.com/photos/7195808/pexels-photo-7195808.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop',
-    ];
-
-    const heroFrame = heroVisual.querySelector('.hero-photo-frame');
-    const heroImage = heroVisual.querySelector('.hero-photo');
-    let activeChip = null;
-
-    const setActiveChip = (chip) => {
-      if (!chip) return;
-      if (activeChip) {
-        activeChip.classList.remove('is-active');
-        activeChip.setAttribute('aria-pressed', 'false');
-      }
-      chip.classList.add('is-active');
-      chip.setAttribute('aria-pressed', 'true');
-      activeChip = chip;
-    };
-
-    const switchPhoto = (chip, src) => {
-      if (!heroImage || !src || heroImage.src === src) {
-        setActiveChip(chip);
-        return;
-      }
-
-      if (heroFrame) heroFrame.classList.add('is-switching');
-      heroImage.style.opacity = '0';
-
-      setTimeout(() => {
-        heroImage.src = src;
-        setActiveChip(chip);
-      }, 150);
-
-      setTimeout(() => {
-        heroImage.style.opacity = '1';
-        if (heroFrame) heroFrame.classList.remove('is-switching');
-      }, 260);
-    };
-
-    sourceMarkup.forEach((markup, idx) => {
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = `orbit-chip orbit-chip-${idx + 1}`;
-      chip.innerHTML = markup;
-      chip.setAttribute('aria-pressed', 'false');
-
-      const nextSrc = photoVariants[idx] || photoVariants[0];
-      chip.addEventListener('click', () => switchPhoto(chip, nextSrc));
-
-      if (idx === 0) setActiveChip(chip);
-      orbitChips.appendChild(chip);
-    });
-
-    heroVisual.appendChild(orbitChips);
+    // Chips functionality disabled - chips now positioned after heading
 
     heroSplit.appendChild(heroInfo);
     heroSplit.appendChild(heroVisual);
