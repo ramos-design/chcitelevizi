@@ -360,6 +360,53 @@ section { padding: 100px 6vw; }
   text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
 }
 
+/* 4 tarify: 1 / 2 / 4 sloupce dle šířky (ať nevznikne 3+1) */
+#tarify .pricing-grid { grid-template-columns: 1fr; }
+@media (min-width: 560px) { #tarify .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px) { #tarify .pricing-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ── SUPPORT BANNER (jen poradenství online) ── */
+.support-banner {
+  margin-top: 4rem;
+  background: var(--card-bg); border: 1.5px dashed rgba(0,0,0,.18);
+  border-radius: 24px; padding: 1.8rem 2.2rem;
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.support-icon {
+  width: 56px; height: 56px; flex-shrink: 0;
+  background: rgba(26,58,92,.1); border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.support-icon svg { width: 28px; height: 28px; stroke: var(--accent2); fill: none; stroke-width: 1.8; }
+.support-text { flex: 1 1 300px; }
+.support-name {
+  font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 800;
+  letter-spacing: -.02em; color: var(--black);
+  display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+}
+.support-name span {
+  font-family: 'Urbanist', sans-serif; font-size: .72rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent2); background: rgba(26,58,92,.1);
+  padding: 3px 10px; border-radius: 100px;
+}
+.support-desc { font-size: .92rem; color: var(--mid); line-height: 1.6; margin-top: .35rem; }
+.support-price { text-align: right; flex: 0 0 auto; }
+.support-amount {
+  font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 800;
+  letter-spacing: -.04em; color: var(--black);
+}
+.support-amount small { font-size: 1rem; font-weight: 500; }
+.support-btn {
+  display: inline-block; margin-top: .4rem; padding: 9px 22px;
+  border-radius: 100px; font-size: .88rem; font-weight: 500;
+  text-decoration: none; cursor: pointer;
+  border: 1.5px solid var(--black); color: var(--black);
+  transition: background .2s, color .2s;
+}
+.support-btn:hover { background: var(--black); color: #fff; }
+@media (max-width: 600px) { .support-price { text-align: left; } }
+
 /* ── PORADENSTVO ── */
 #poradenstvi {
   background: #0d0d0d;
@@ -595,6 +642,57 @@ footer {
 }
 .lightbox-close:hover { background: var(--accent); }
 
+/* ── CO / JAK / PROČ ── */
+#proc-my { background: var(--white); }
+.cjp-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin-top: 4rem;
+}
+.cjp-card {
+  background: var(--card-bg); border: 1.5px solid var(--border);
+  border-radius: 24px; padding: 2.5rem 2.2rem;
+  transition: transform .3s, box-shadow .3s;
+}
+.cjp-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.cjp-step {
+  font-size: .78rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
+}
+.cjp-icon {
+  width: 52px; height: 52px; background: rgba(232,92,46,.1);
+  border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.4rem;
+}
+.cjp-icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+.cjp-title {
+  font-family: 'Fraunces', serif; font-size: 1.45rem; font-weight: 700;
+  letter-spacing: -.02em; color: var(--black); margin-bottom: .7rem;
+}
+.cjp-text { font-size: .95rem; color: var(--mid); line-height: 1.7; }
+
+/* ── ZNAČKY ── */
+#znacky {
+  background: var(--black); color: var(--white);
+  padding: 60px 6vw; text-align: center;
+}
+.brands-label {
+  font-size: .8rem; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.4);
+  margin-bottom: 2.5rem;
+}
+.brands-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 2.5rem 4rem;
+}
+.brand-name {
+  font-family: 'Urbanist', sans-serif; font-weight: 800;
+  font-size: 1.5rem; letter-spacing: .02em;
+  color: rgba(255,255,255,.55);
+  transition: color .25s, transform .25s;
+}
+.brand-name:hover { color: #fff; transform: translateY(-2px); }
+@media (max-width: 600px) { .brands-row { gap: 1.6rem 2.4rem; } .brand-name { font-size: 1.2rem; } }
+
 /* ── SCROLL ANIMATION ── */
 .reveal {
   opacity: 0; transform: translateY(30px);
@@ -653,8 +751,8 @@ footer {
     <div class="hero-badge">
       <span>Dostupné výhradně pro Prahu</span>
     </div>
-    <h1>Váš nový<br>televizní <em>zážitek</em><br>začíná zde.</h1>
-    <p class="hero-sub">Profesionální instalace, seřízení a optimalizace televizoru přímo u vás doma nebo v kanceláři. Žádné starosti, žádný zbytečný stres.</p>
+    <h1>Pomáháme vám<br>si správně <em>vybrat</em>.</h1>
+    <p class="hero-sub">Ať už hledáte cokoliv v rámci zobrazovacích technologií, s námi jste na správném místě. Vytipujeme vám nejvhodnější zařízení podle vašich potřeb a v případě zájmu jej přivezeme, rozbalíme a nainstalujeme. Prostě video od A&nbsp;–&nbsp;Z.</p>
     <div class="hero-actions">
       <a href="#kontakt" class="btn-primary">Objednat instalaci →</a>
       <a href="#jak-to-funguje" class="btn-secondary">Jak to funguje</a>
@@ -701,6 +799,54 @@ footer {
   </div>
 </section>
 
+<!-- ZNAČKY -->
+<section id="znacky" class="reveal">
+  <div class="brands-label">Pracujeme se značkami, kterým věříme</div>
+  <div class="brands-row">
+    <span class="brand-name">SAMSUNG</span>
+    <span class="brand-name">LG</span>
+    <span class="brand-name">SONY</span>
+    <span class="brand-name">Hisense</span>
+    <span class="brand-name">TCL</span>
+    <span class="brand-name">PHILIPS</span>
+  </div>
+</section>
+
+<!-- CO / JAK / PROČ -->
+<section id="proc-my">
+  <div class="reveal" style="text-align:center; max-width:640px; margin:0 auto">
+    <div class="section-tag">Kdo jsme</div>
+    <h2 class="section-title">Video <em>od A do Z</em></h2>
+    <p class="section-desc" style="margin:1rem auto 0">Poradenství, výběr, doprava i instalace pod jednou střechou. Tady je, co děláme, jak to děláme a proč.</p>
+  </div>
+  <div class="cjp-grid reveal">
+    <div class="cjp-card">
+      <div class="cjp-step">Co děláme</div>
+      <div class="cjp-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="cjp-title">Vybereme a nainstalujeme</div>
+      <div class="cjp-text">Vytipujeme nejvhodnější televizi podle vašich potřeb a rozpočtu, přivezeme ji, rozbalíme, pověsíme či postavíme a kompletně zprovozníme.</div>
+    </div>
+    <div class="cjp-card">
+      <div class="cjp-step">Jak to děláme</div>
+      <div class="cjp-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="cjp-title">Na klíč, bez starostí</div>
+      <div class="cjp-text">Jeden termín, jeden technik, jasná cena. Zaměříme místo instalace, vše připravíme a předáme vám hotové řešení připravené ke sledování.</div>
+    </div>
+    <div class="cjp-card">
+      <div class="cjp-step">Proč to děláme</div>
+      <div class="cjp-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div class="cjp-title">Baví nás správný výběr</div>
+      <div class="cjp-text">Trh je přeplněný a orientovat se v něm je těžké. Díky know-how a zkušenostem z praxe vám ušetříme čas, peníze i zklamání ze špatné koupě.</div>
+    </div>
+  </div>
+</section>
+
 <!-- JAK TO FUNGUJE -->
 <section id="jak-to-funguje">
   <div class="section-header reveal">
@@ -726,8 +872,8 @@ footer {
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
         </svg>
       </div>
-      <div class="step-title">Potvrzení a konzultace</div>
-      <div class="step-text">Zavoláme vám zpět pro potvrzení termínu a zodpovíme všechny vaše otázky ohledně instalace.</div>
+      <div class="step-title">Potvrzení, konzultace a zaměření</div>
+      <div class="step-text">Potvrdíme termín, probereme vaše představy a zaměříme instalaci – na zeď, nebo na stolek? Doporučíme vhodný způsob zavěšení a držák.</div>
     </div>
     <div class="step-card">
       <div class="step-num">03</div>
@@ -777,25 +923,41 @@ footer {
   <div class="reveal">
     <div class="section-tag">Ceník</div>
     <h2 class="section-title">Vyberte si <em>službu</em></h2>
-    <p class="section-desc">Tři balíčky navržené tak, aby vyhověly různým potřebám – od jednoduchého nastavení až po komplexní řešení pro náročné.</p>
+    <p class="section-desc">Poskytujeme realizace „na klíč“. Vyberte si balíček, který vám sedne – od základní instalace na stolek až po komplexní řešení pro nejnáročnější. Níže je celý postup, pokud se rozhodnete některý z nich využít.</p>
   </div>
+
+  <!-- SUPPORT – jen poradenství online -->
+  <div class="support-banner reveal">
+    <div class="support-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+    </div>
+    <div class="support-text">
+      <div class="support-name">Support <span>Jen poradíme</span></div>
+      <div class="support-desc">Online, e-mailová či telefonická konzultace s doporučením vhodné TV na základě vašeho rozpočtu a představ. Bez nutnosti instalace.</div>
+    </div>
+    <div class="support-price">
+      <div class="support-amount">490 <small>Kč</small></div>
+      <a href="#kontakt" class="support-btn">Chci poradit</a>
+    </div>
+  </div>
+
   <div class="pricing-grid reveal">
     <!-- BASIC -->
     <div class="pricing-card">
       <div class="pricing-label">Tarif 01</div>
       <div class="pricing-name">Basic</div>
       <div class="pricing-price">
-        <div class="price-amount"><span class="price-currency">od </span>999</div>
+        <div class="price-amount"><span class="price-currency">od </span>1 490</div>
         <div class="price-note">Kč / jednorázová platba</div>
       </div>
       <div class="pricing-divider"></div>
       <ul class="pricing-features">
-        <li>Fyzická instalace a umístění televize</li>
-        <li>Připojení k anténě nebo kabelové televizi</li>
-        <li>Nastavení základních parametrů obrazu</li>
-        <li>Připojení k domácí Wi-Fi</li>
-        <li>Instalace jedné streamovací aplikace</li>
-        <li>Telefonická podpora 7 dní po instalaci</li>
+        <li>Výběr TV na základě reálných zkušeností z praxe</li>
+        <li>Doporučení konkrétního modelu k zakoupení</li>
+        <li>Základní doprava po Praze</li>
+        <li>Běžná instalace na TV stolek a připojení k síti</li>
+        <li>Podpora 7 dní od zakoupení</li>
+        <li>Televize do úhlopříčky 55"</li>
       </ul>
       <a href="#kontakt" class="pricing-btn">Vybrat Basic</a>
     </div>
@@ -805,18 +967,15 @@ footer {
       <div class="pricing-label">Tarif 02</div>
       <div class="pricing-name">Standard</div>
       <div class="pricing-price">
-        <div class="price-amount"><span class="price-currency">od </span>1 899</div>
+        <div class="price-amount"><span class="price-currency">od </span>2 490</div>
         <div class="price-note">Kč / jednorázová platba</div>
       </div>
       <div class="pricing-divider"></div>
       <ul class="pricing-features">
         <li>Vše z balíčku Basic</li>
-        <li>Montáž na stěnu včetně vrtání a kabeláže</li>
-        <li>Profesionální kalibrace obrazu (jas, kontrast, barvy)</li>
-        <li>Nastavení prostorového zvuku a soundbaru</li>
-        <li>Konfigurace až 5 streamovacích aplikací</li>
-        <li>Nastavení Smart TV a uživatelských profilů</li>
-        <li>Podpora 30 dní po instalaci</li>
+        <li>Instalace televize na zeď</li>
+        <li>Připevnění nástěnného držáku</li>
+        <li>Uložení kabeláže a zprovoznění</li>
       </ul>
       <a href="#kontakt" class="pricing-btn">Vybrat Standard</a>
     </div>
@@ -825,20 +984,36 @@ footer {
       <div class="pricing-label">Tarif 03</div>
       <div class="pricing-name">Exclusive</div>
       <div class="pricing-price">
-        <div class="price-amount"><span class="price-currency">od </span>3 499</div>
+        <div class="price-amount"><span class="price-currency">od </span>3 990</div>
         <div class="price-note">Kč / jednorázová platba</div>
       </div>
       <div class="pricing-divider"></div>
       <ul class="pricing-features">
-        <li>Vše z balíčku Standard</li>
-        <li>Skrytá kabeláž ve zdi (atelier řešení)</li>
-        <li>ISF kalibrace pro kino zážitek doma</li>
-        <li>Integrace s chytrou domácností (Google Home, Apple TV)</li>
-        <li>Konfigurace neomezeného počtu aplikací a profilů</li>
-        <li>Poradenství při výběru TV a příslušenství</li>
-        <li>Prioritní podpora 90 dní – telefon i návštěva</li>
+        <li>Vše z balíčku Basic</li>
+        <li>Individuální konfigurace pro nejnáročnější</li>
+        <li>Komplexní přístup s neomezenou podporou</li>
+        <li>Instalace a nastavení aplikací</li>
+        <li>Doporučení optimálního nastavení obrazu i zvuku</li>
+        <li>Doporučení profi kalibrace obrazu speciální kamerou (za příplatek)</li>
       </ul>
       <a href="#kontakt" class="pricing-btn">Vybrat Exclusive</a>
+    </div>
+    <!-- EXCLUSIVE PRO -->
+    <div class="pricing-card">
+      <div class="pricing-label">Tarif 04</div>
+      <div class="pricing-name">Exclusive PRO</div>
+      <div class="pricing-price">
+        <div class="price-amount"><span class="price-currency">od </span>4 990</div>
+        <div class="price-note">Kč / jednorázová platba</div>
+      </div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Vše z balíčku Basic, Standard i Exclusive</li>
+        <li>Instalace televize na zeď</li>
+        <li>Kompletní řešení od výběru až po finální nastavení</li>
+        <li>Neomezená podpora a prioritní přístup</li>
+      </ul>
+      <a href="#kontakt" class="pricing-btn">Vybrat Exclusive PRO</a>
     </div>
   </div>
 </section>
@@ -874,18 +1049,18 @@ footer {
         <div class="adv-item">
           <div class="adv-icon">💶</div>
           <div>
-            <div class="adv-text">Nejlepší poměr cena/výkon 2024</div>
+            <div class="adv-text">Nejlepší poměr cena/výkon 2026</div>
             <div class="adv-sub">Doporučení pro různé rozpočty</div>
           </div>
           <div class="adv-tag">Zdarma</div>
         </div>
         <div class="adv-item">
-          <div class="adv-icon">🔊</div>
+          <div class="adv-icon">🎯</div>
           <div>
-            <div class="adv-text">Potřebuji soundbar nebo AV receiver?</div>
-            <div class="adv-sub">Pomůžeme navrhnout audio řešení</div>
+            <div class="adv-text">Profesionální kalibrace obrazu</div>
+            <div class="adv-sub">Přesné seřízení speciální kamerou – ve spolupráci s p. Šimkem</div>
           </div>
-          <div class="adv-tag">Zdarma</div>
+          <div class="adv-tag" style="background:rgba(26,58,92,.25);color:#9bbbd6">Příplatek</div>
         </div>
       </div>
     </div>
@@ -1356,7 +1531,7 @@ footer {
     <a href="#recenze">Recenze</a>
     <a href="#kontakt">Kontakt</a>
   </div>
-  <div class="footer-copy">© 2024 ChciTelevizi.cz – Všechna práva vyhrazena</div>
+  <div class="footer-copy">© 2026 ChciTelevizi.cz – Všechna práva vyhrazena</div>
 </footer>
 
 <!-- LIGHTBOX -->
