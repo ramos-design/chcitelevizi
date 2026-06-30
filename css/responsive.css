@@ -45,6 +45,8 @@
   .hero-chips   { justify-content: center; }
   .hero-actions { justify-content: center; }
   .hero-proof   { align-self: center; }
+  .hero-pillars { grid-template-columns: 1fr; max-width: 100%; text-align: left; }
+  .hero-pillar-label { justify-content: flex-start; }
   .hero-visual  { display: none; }
 
   /* Sections */
