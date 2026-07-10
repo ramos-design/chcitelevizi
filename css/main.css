@@ -34,6 +34,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Desktop: větší základ písma — vše v rem se škáluje proporcionálně */
+@media (min-width: 901px) {
+  html { font-size: 18px; }
+}
+
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--white);
