@@ -362,7 +362,9 @@
       </div>
     </div>
 
-    <div class="pricing-grid reveal">
+    <div class="pricing-carousel reveal">
+      <div class="pricing-viewport">
+        <div class="pricing-track" role="region" aria-roledescription="carousel" aria-label="Tarify" tabindex="0">
 
       <!-- Basic -->
       <div class="pricing-card">
@@ -441,6 +443,22 @@
         <a href="#kontakt" class="pricing-btn">Vybrat Exclusive PRO</a>
       </div>
 
+        </div><!-- /pricing-track -->
+
+        <div class="pricing-fade fade-left" aria-hidden="true"></div>
+        <div class="pricing-fade fade-right" aria-hidden="true"></div>
+
+        <button class="pricing-arrow prev" type="button" aria-label="Předchozí tarify">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="pricing-arrow next" type="button" aria-label="Další tarify">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div><!-- /pricing-viewport -->
+
+      <div class="pricing-dots"></div>
     </div>
   </section>
 

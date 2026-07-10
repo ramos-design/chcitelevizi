@@ -8,11 +8,9 @@
   .steps-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .pricing-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
+  /* Pricing carousel: 2 karty + náhled další */
+  .pricing-card {
+    flex-basis: calc((100% - 2 * var(--gap) - var(--peek)) / 2);
   }
 
 }
@@ -113,8 +111,13 @@
   .faq-q { font-size: .95rem; padding: 1.2rem 1.25rem; gap: .9rem; }
   .faq-a-inner { padding: 0 1.25rem 1.3rem; }
 
-  /* Pricing */
-  .pricing-grid { grid-template-columns: 1fr; }
+  /* Pricing carousel: 1 karta + náhled další, ovládání swipem */
+  .pricing-carousel { --peek: 2.5rem; }
+  .pricing-card {
+    flex-basis: calc(100% - var(--gap) - var(--peek));
+  }
+  .pricing-arrow { display: none; }
+  .pricing-fade { width: 32px; }
 
   /* Form */
   .form-row { grid-template-columns: 1fr; }

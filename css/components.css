@@ -148,13 +148,114 @@
 }
 #tarify .section-desc { margin: 1rem auto 0; }
 
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+/* ── Pricing carousel ── */
+.pricing-carousel {
+  --gap: 1.25rem;   /* mezera mezi kartami */
+  --peek: 3.5rem;   /* kolik z další karty vykukuje */
+  --edge: 8px;      /* vnitřní odsazení dráhy (prostor pro stíny) */
+  position: relative;
   margin-top: 1.5rem;
-  align-items: stretch;
 }
+
+.pricing-viewport { position: relative; }
+
+.pricing-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--edge);
+  padding: 12px var(--edge) 56px;
+  margin-bottom: -34px;
+  cursor: grab;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.pricing-track::-webkit-scrollbar { display: none; }
+.pricing-track.dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}
+.pricing-track:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+/* Okraje „do ztracena" – gradient do barvy pozadí sekce */
+.pricing-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 6vw, 100px);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity .35s var(--ease-out);
+}
+.pricing-fade.fade-left {
+  left: 0;
+  background: linear-gradient(90deg, var(--cream) 10%, rgba(237,233,225,0));
+}
+.pricing-fade.fade-right {
+  right: 0;
+  background: linear-gradient(270deg, var(--cream) 10%, rgba(237,233,225,0));
+}
+.pricing-carousel.at-start .fade-left,
+.pricing-carousel.at-end .fade-right { opacity: 0; }
+
+/* Šipky */
+.pricing-arrow {
+  position: absolute;
+  top: calc(50% - 22px);
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: var(--black);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  transition: opacity .3s, background .2s, transform .2s;
+}
+.pricing-arrow svg { width: 20px; height: 20px; }
+.pricing-arrow:hover { background: var(--accent); transform: translateY(-50%) scale(1.06); }
+.pricing-arrow.prev { left: -10px; }
+.pricing-arrow.next { right: -10px; }
+.pricing-carousel.at-start .pricing-arrow.prev,
+.pricing-carousel.at-end .pricing-arrow.next {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Tečky */
+.pricing-dots {
+  display: flex;
+  justify-content: center;
+  gap: .3rem;
+  position: relative;
+  z-index: 3;
+}
+.pricing-dot {
+  box-sizing: content-box;
+  width: 9px;
+  height: 9px;
+  border-radius: 100px;
+  border: 6px solid transparent; /* větší dotyková plocha */
+  background-clip: padding-box;
+  padding: 0;
+  background-color: rgba(0,0,0,.16);
+  cursor: pointer;
+  transition: width .35s var(--ease-out), background-color .25s;
+}
+.pricing-dot:hover { background-color: rgba(0,0,0,.34); }
+.pricing-dot.active { width: 28px; background-color: var(--accent); }
 
 /* Support – jednoduchý banner ve stejném stylu (jen poradenství online) */
 .support-banner {
@@ -195,6 +296,9 @@
 @media (max-width: 600px) { .support-banner-side { text-align: left; } }
 
 .pricing-card {
+  /* 3 karty viditelné + kousek další „do ztracena" */
+  flex: 0 0 calc((100% - 3 * var(--gap) - var(--peek)) / 3);
+  scroll-snap-align: start;
   background: var(--card-bg);
   border-radius: 20px;
   padding: 2.4rem 2rem;

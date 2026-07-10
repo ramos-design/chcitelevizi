@@ -391,4 +391,125 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', highlightNav, { passive: true });
   highlightNav();
 
+  /* ── PRICING CAROUSEL ── */
+  const pricingCarousel = document.querySelector('.pricing-carousel');
+  if (pricingCarousel) {
+    const track    = pricingCarousel.querySelector('.pricing-track');
+    const cards    = Array.from(track.children);
+    const prevBtn  = pricingCarousel.querySelector('.pricing-arrow.prev');
+    const nextBtn  = pricingCarousel.querySelector('.pricing-arrow.next');
+    const dotsWrap = pricingCarousel.querySelector('.pricing-dots');
+
+    let positions = [];
+    let dots = [];
+
+    /* Snap pozice = začátky karet, oříznuté na max. posun (duplicity pryč) */
+    const computePositions = () => {
+      const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      positions = [];
+      cards.forEach((card) => {
+        const pos = Math.min(Math.max(card.offsetLeft - padLeft, 0), maxScroll);
+        if (!positions.length || pos - positions[positions.length - 1] > 2) positions.push(pos);
+      });
+    };
+
+    const nearestIndex = (x) => {
+      let idx = 0;
+      positions.forEach((p, i) => {
+        if (Math.abs(p - x) < Math.abs(positions[idx] - x)) idx = i;
+      });
+      return idx;
+    };
+
+    const updateState = () => {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      const x = track.scrollLeft;
+      pricingCarousel.classList.toggle('at-start', x < 4);
+      pricingCarousel.classList.toggle('at-end', x > maxScroll - 4);
+      const active = nearestIndex(x);
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
+    };
+
+    const buildDots = () => {
+      dotsWrap.innerHTML = '';
+      dots = positions.map((pos, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pricing-dot';
+        dot.setAttribute('aria-label', `Posunout tarify na pozici ${i + 1}`);
+        dot.addEventListener('click', () => track.scrollTo({ left: pos, behavior: 'smooth' }));
+        dotsWrap.appendChild(dot);
+        return dot;
+      });
+    };
+
+    const refresh = () => {
+      computePositions();
+      buildDots();
+      updateState();
+    };
+
+    prevBtn.addEventListener('click', () => {
+      const target = [...positions].reverse().find((p) => p < track.scrollLeft - 4);
+      track.scrollTo({ left: target !== undefined ? target : 0, behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+      const target = positions.find((p) => p > track.scrollLeft + 4);
+      if (target !== undefined) track.scrollTo({ left: target, behavior: 'smooth' });
+    });
+
+    /* Tažení myší (na dotyku funguje nativní swipe) */
+    let dragging = false;
+    let dragMoved = false;
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+    let snapTimer;
+
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      dragging = true;
+      dragMoved = false;
+      dragStartX = e.clientX;
+      dragStartScroll = track.scrollLeft;
+      clearTimeout(snapTimer);
+      track.classList.add('dragging');
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 6) dragMoved = true;
+      track.scrollLeft = dragStartScroll - dx;
+    });
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      track.scrollTo({ left: positions[nearestIndex(track.scrollLeft)], behavior: 'smooth' });
+      snapTimer = setTimeout(() => track.classList.remove('dragging'), 450);
+    };
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
+
+    /* Po tažení nespouštět klik na tlačítka v kartách */
+    track.addEventListener('click', (e) => {
+      if (dragMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+        dragMoved = false;
+      }
+    }, true);
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+
+    track.addEventListener('scroll', () => requestAnimationFrame(updateState), { passive: true });
+
+    let pricingResizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(pricingResizeTimer);
+      pricingResizeTimer = setTimeout(refresh, 150);
+    });
+
+    refresh();
+    window.addEventListener('load', refresh);
+  }
+
 });

@@ -35,7 +35,7 @@
 
 /* ── STAGGER REVEALS IN GRID CONTAINERS ── */
 (function staggerGridItems() {
-  const grids = ['.steps-grid', '.pricing-grid', '.reviews-grid', '.gallery-grid'];
+  const grids = ['.steps-grid', '.reviews-grid', '.gallery-grid'];
 
   grids.forEach((selector) => {
     const grid = document.querySelector(selector);
