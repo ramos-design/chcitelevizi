@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administrace blogu – CHCI TELEVIZI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/blog.css">
+</head>
+
+<body class="admin-body">
+
+  <div class="admin-shell">
+
+    <!-- ═══════════ TOPBAR ═══════════ -->
+    <div class="admin-topbar">
+      <a href="index.html" class="nav-logo">CHCI<span>TELEVIZI</span>.cz <span
+          style="color:rgba(255,255,255,.35);font-weight:500;font-size:.8rem;margin-left:8px">/ administrace</span></a>
+      <div class="admin-topbar-actions" id="topbarActions" hidden>
+        <span class="admin-user-email" id="userEmail"></span>
+        <a href="blog.html" class="admin-btn admin-btn--ghost admin-btn--sm" target="_blank" rel="noopener">Zobrazit
+          blog ↗</a>
+        <button class="admin-btn admin-btn--ghost admin-btn--sm" id="btnLogout">Odhlásit se</button>
+      </div>
+    </div>
+
+    <!-- ═══════════ PŘIHLÁŠENÍ ═══════════ -->
+    <div id="viewLogin" hidden>
+      <form class="admin-login" id="loginForm">
+        <div class="form-title">Přihlášení</div>
+        <div class="form-subtitle">Správa blogových článků</div>
+        <div class="form-group">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" class="form-control" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Heslo</label>
+          <input type="password" id="loginPassword" class="form-control" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="form-submit" id="loginSubmit">Přihlásit se →</button>
+        <div class="form-error" id="loginError"></div>
+      </form>
+    </div>
+
+    <!-- ═══════════ SEZNAM ČLÁNKŮ ═══════════ -->
+    <div id="viewList" hidden>
+      <div class="admin-panel">
+        <div class="admin-panel-head">
+          <div>
+            <div class="admin-panel-title">Blogové články</div>
+            <div class="admin-count" id="postCount"></div>
+          </div>
+          <button class="admin-btn" id="btnNew">+ Nový článek</button>
+        </div>
+        <div class="admin-list" id="postList">
+          <div class="admin-row"><div class="admin-row-main"><div class="admin-row-title"
+                style="color:rgba(255,255,255,.4)">Načítám…</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ EDITOR ═══════════ -->
+    <div id="viewEditor" hidden>
+      <div class="admin-panel">
+        <div class="admin-panel-head">
+          <div>
+            <div class="admin-panel-title" id="editorTitle">Nový článek</div>
+            <div class="admin-count">Obsah se píše v jednoduchém formátu Markdown – viz nápověda pod polem</div>
+          </div>
+          <button class="admin-btn admin-btn--ghost admin-btn--sm" id="btnBack">← Zpět na seznam</button>
+        </div>
+
+        <form class="admin-editor" id="editorForm">
+          <div class="admin-editor-grid">
+            <div class="form-group full">
+              <label for="f-title">Titulek *</label>
+              <input type="text" id="f-title" class="form-control" placeholder="Např. Jak vybrat televizi do ložnice"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="f-slug">Adresa článku (slug)</label>
+              <input type="text" id="f-slug" class="form-control" placeholder="jak-vybrat-televizi-do-loznice">
+              <div class="editor-hint">Vyplní se automaticky z titulku. Tvoří webovou adresu článku.</div>
+            </div>
+            <div class="form-group">
+              <label for="f-cover">Úvodní obrázek (URL)</label>
+              <input type="url" id="f-cover" class="form-control" placeholder="https://…">
+              <div class="editor-hint">Odkaz na obrázek, např. z <a href="https://www.pexels.com" target="_blank"
+                  rel="noopener" style="color:rgba(255,255,255,.5);text-decoration:underline">pexels.com</a>. Nepovinné.
+              </div>
+            </div>
+            <div class="form-group full">
+              <label for="f-excerpt">Perex (krátký úvod) *</label>
+              <textarea id="f-excerpt" class="form-control" rows="2"
+                placeholder="Jedna dvě věty, které se zobrazí ve výpisu článků…" required></textarea>
+            </div>
+            <div class="form-group full">
+              <label for="f-content">Obsah článku *</label>
+              <textarea id="f-content" class="form-control" required
+                placeholder="## Nadpis kapitoly&#10;&#10;Běžný odstavec textu…"></textarea>
+              <div class="editor-hint">
+                <code>## Nadpis</code> &nbsp; <code>### Podnadpis</code> &nbsp; <code>**tučně**</code> &nbsp;
+                <code>*kurzíva*</code> &nbsp; <code>- odrážka</code> &nbsp; <code>1. číslovaný bod</code> &nbsp;
+                <code>&gt; citace</code> &nbsp; <code>[text odkazu](https://adresa.cz)</code> &nbsp;
+                <code>![popis obrázku](https://adresa-obrazku.jpg)</code> &nbsp; <code>---</code> oddělovací čára.
+                Odstavce oddělujte prázdným řádkem.
+              </div>
+            </div>
+          </div>
+
+          <div id="previewWrap" hidden>
+            <div class="admin-preview">
+              <div class="article-content" id="previewContent"></div>
+            </div>
+          </div>
+
+          <div class="editor-actions">
+            <label class="publish-toggle">
+              <input type="checkbox" id="f-published">
+              <span class="toggle-track"></span>
+              Publikovat článek
+            </label>
+            <div class="editor-actions-right">
+              <button type="button" class="admin-btn admin-btn--ghost" id="btnPreview">Náhled</button>
+              <button type="submit" class="admin-btn" id="btnSave">Uložit článek</button>
+            </div>
+          </div>
+          <div class="form-error" id="editorError"></div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="admin-toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/cms.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+
+</html>

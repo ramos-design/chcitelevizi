@@ -339,6 +339,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
+  /* ── FAQ ACCORDION ── */
+  (() => {
+    const items = document.querySelectorAll('.faq-item');
+    if (!items.length) return;
+
+    items.forEach((item) => {
+      const btn = item.querySelector('.faq-q');
+      const ans = item.querySelector('.faq-a');
+      if (!btn || !ans) return;
+
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        ans.style.maxHeight = isOpen ? `${ans.scrollHeight}px` : '';
+      });
+    });
+
+    // Recompute height of open answers after resize (text reflows)
+    window.addEventListener(
+      'resize',
+      () => {
+        document.querySelectorAll('.faq-item.open .faq-a').forEach((ans) => {
+          ans.style.maxHeight = `${ans.scrollHeight}px`;
+        });
+      },
+      { passive: true }
+    );
+  })();
+
   /* ── ACTIVE NAV LINK HIGHLIGHT ── */
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');

@@ -57,6 +57,12 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* O nás */
+  #o-nas {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
   /* Poradenství */
   #poradenstvi {
     grid-template-columns: 1fr;
@@ -98,6 +104,14 @@
 
   /* Steps */
   .steps-grid { grid-template-columns: 1fr; }
+
+  /* O nás */
+  .about-stats { grid-template-columns: 1fr; }
+  .about-stat-num { font-size: 2.1rem; }
+
+  /* FAQ */
+  .faq-q { font-size: .95rem; padding: 1.2rem 1.25rem; gap: .9rem; }
+  .faq-a-inner { padding: 0 1.25rem 1.3rem; }
 
   /* Pricing */
   .pricing-grid { grid-template-columns: 1fr; }

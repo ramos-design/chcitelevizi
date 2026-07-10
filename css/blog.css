@@ -1,0 +1,688 @@
+/* ═══════════════════════════════════════════════════════
+   BLOG.CSS — Blog výpis, detail článku, blok na úvodní straně, admin
+   CHCI TELEVIZI — Premium TV Installation, Prague
+═══════════════════════════════════════════════════════ */
+
+/* ════════════════════════════════════
+   BLOG BLOK NA ÚVODNÍ STRANĚ + VÝPIS
+════════════════════════════════════ */
+#blog {
+  background: var(--white);
+}
+#blog .section-header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+#blog .section-desc { margin: .8rem auto 0; }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 4rem;
+}
+
+.blog-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+}
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0,0,0,.12);
+}
+
+.blog-card-cover {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #1a3a5c 0%, #0d2040 60%, #17151a 100%);
+  position: relative;
+  overflow: hidden;
+}
+.blog-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s var(--ease-out);
+}
+.blog-card:hover .blog-card-cover img { transform: scale(1.05); }
+.blog-card-cover--placeholder::after {
+  content: '📺';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  opacity: .5;
+}
+
+.blog-card-body {
+  padding: 1.6rem 1.7rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .8rem;
+}
+.blog-card-meta .blog-date {
+  color: var(--mid);
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.blog-card-meta .blog-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.2);
+  flex-shrink: 0;
+}
+
+.blog-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.3;
+  color: var(--black);
+  margin-bottom: .6rem;
+}
+.blog-card-excerpt {
+  font-size: .88rem;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 1.4rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-card-link {
+  margin-top: auto;
+  font-size: .87rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap .2s var(--ease-out);
+}
+.blog-card:hover .blog-card-link { gap: 10px; }
+
+.blog-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+/* Featured (první článek na stránce blogu) */
+.blog-featured {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background: var(--card-bg);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 4rem;
+  transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+}
+.blog-featured:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0,0,0,.12);
+}
+.blog-featured .blog-card-cover {
+  aspect-ratio: auto;
+  min-height: 320px;
+  height: 100%;
+}
+.blog-featured .blog-card-body {
+  padding: 2.6rem 2.8rem;
+  justify-content: center;
+}
+.blog-featured .blog-card-title {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  margin-bottom: .9rem;
+}
+.blog-featured .blog-card-excerpt {
+  font-size: .95rem;
+  -webkit-line-clamp: 4;
+}
+.blog-featured + .blog-grid { margin-top: 1.25rem; }
+
+/* Skeleton / stavy načítání */
+.blog-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--mid);
+  font-size: .95rem;
+  grid-column: 1 / -1;
+}
+.blog-skeleton {
+  border-radius: 20px;
+  background: linear-gradient(100deg, rgba(0,0,0,.05) 30%, rgba(0,0,0,.02) 50%, rgba(0,0,0,.05) 70%);
+  background-size: 200% 100%;
+  animation: blogShimmer 1.4s ease-in-out infinite;
+  min-height: 340px;
+}
+@keyframes blogShimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ════════════════════════════════════
+   HLAVIČKA PODSTRÁNKY (blog + článek)
+════════════════════════════════════ */
+.page-hero {
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+  padding: calc(16px + var(--nav-h) + 70px) 5vw 70px;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 90% at 60% 0%, rgba(26,58,92,.5) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 5% 100%, rgba(232,92,46,.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+}
+.page-hero-inner.centered {
+  margin: 0 auto;
+  text-align: center;
+}
+.page-hero-inner.centered .section-tag { justify-content: center; }
+.page-hero h1 {
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  animation: none;
+}
+.page-hero .page-hero-sub {
+  font-size: 1.02rem;
+  color: rgba(255,255,255,.5);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 1.2rem auto 0;
+}
+.page-hero .article-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.4rem;
+  font-size: .85rem;
+  color: rgba(255,255,255,.45);
+  font-weight: 500;
+}
+.page-hero .article-meta .blog-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+}
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 1.6rem;
+  transition: color .2s;
+}
+.breadcrumb:hover { color: #fff; }
+
+/* ════════════════════════════════════
+   STRÁNKA S VÝPISEM
+════════════════════════════════════ */
+#blog-listing {
+  background: var(--white);
+  min-height: 50vh;
+  padding-top: 70px;
+}
+
+/* ════════════════════════════════════
+   DETAIL ČLÁNKU
+════════════════════════════════════ */
+#clanek-body {
+  background: var(--white);
+  padding-top: 70px;
+}
+
+.article-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.article-cover {
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.article-cover img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+}
+
+.article-content {
+  font-size: 1.04rem;
+  line-height: 1.9;
+  color: #33302c;
+}
+.article-content > * + * { margin-top: 1.3rem; }
+.article-content h2 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--black);
+  margin-top: 2.8rem;
+}
+.article-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--black);
+  margin-top: 2.2rem;
+}
+.article-content a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(232,92,46,.35);
+  text-underline-offset: 3px;
+}
+.article-content a:hover { text-decoration-color: var(--accent); }
+.article-content strong { color: var(--black); }
+.article-content ul, .article-content ol {
+  padding-left: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.article-content ul { list-style: disc; }
+.article-content ol { list-style: decimal; }
+.article-content ul li::marker { color: var(--accent); }
+.article-content ol li::marker { color: var(--accent); font-weight: 700; }
+.article-content blockquote {
+  border-left: 3px solid var(--accent);
+  background: rgba(232,92,46,.05);
+  border-radius: 0 12px 12px 0;
+  padding: 1.1rem 1.4rem;
+  font-style: italic;
+  color: #55504a;
+}
+.article-content img {
+  border-radius: 14px;
+  margin: .5rem auto;
+  box-shadow: var(--shadow);
+}
+.article-content hr {
+  border: none;
+  height: 1px;
+  background: rgba(0,0,0,.08);
+  margin: 2.5rem 0;
+}
+.article-content code {
+  background: rgba(0,0,0,.06);
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: .88em;
+}
+
+.article-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0,0,0,.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Další články pod detailem */
+#dalsi-clanky {
+  background: var(--cream);
+}
+#dalsi-clanky .section-header {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ════════════════════════════════════
+   ADMINISTRACE
+════════════════════════════════════ */
+.admin-body {
+  background: #0d0d0d;
+  min-height: 100vh;
+  color: var(--white);
+}
+.admin-body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 80% 0%, rgba(26,58,92,.25) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 0% 100%, rgba(232,92,46,.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.admin-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 5vw 5rem;
+}
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.2rem 0 2.2rem;
+}
+.admin-topbar .nav-logo { font-size: 1.05rem; }
+.admin-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  flex-wrap: wrap;
+}
+.admin-user-email {
+  font-size: .8rem;
+  color: rgba(255,255,255,.35);
+  margin-right: .4rem;
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: .875rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: .01em;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 16px rgba(232,92,46,.3);
+}
+.admin-btn:hover { background: #d0501f; transform: translateY(-1px); }
+.admin-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+.admin-btn--ghost {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.75);
+  box-shadow: none;
+}
+.admin-btn--ghost:hover { background: rgba(255,255,255,.1); color: #fff; }
+
+.admin-btn--danger {
+  background: rgba(239,68,68,.12);
+  border: 1px solid rgba(239,68,68,.3);
+  color: #f87171;
+  box-shadow: none;
+}
+.admin-btn--danger:hover { background: rgba(239,68,68,.2); }
+
+.admin-btn--sm { padding: 7px 14px; font-size: .8rem; border-radius: 7px; }
+
+/* Login */
+.admin-login {
+  max-width: 420px;
+  margin: 10vh auto 0;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  padding: 2.8rem 2.4rem;
+  position: relative;
+  z-index: 1;
+}
+.admin-login .form-title { margin-bottom: .3rem; }
+.admin-login .form-subtitle { margin-bottom: 1.8rem; }
+
+/* Seznam článků */
+.admin-panel {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.admin-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 1.8rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.admin-panel-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -.01em;
+}
+.admin-count {
+  font-size: .78rem;
+  color: rgba(255,255,255,.35);
+  margin-top: 2px;
+}
+
+.admin-list { display: flex; flex-direction: column; }
+.admin-row {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.1rem 1.8rem;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  transition: background .2s;
+}
+.admin-row:last-child { border-bottom: none; }
+.admin-row:hover { background: rgba(255,255,255,.03); }
+
+.admin-row-main { flex: 1; min-width: 0; }
+.admin-row-title {
+  font-size: .95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.88);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin-row-meta {
+  font-size: .76rem;
+  color: rgba(255,255,255,.32);
+  margin-top: 3px;
+}
+.admin-row-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.status-pill {
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+.status-pill--live {
+  background: rgba(74,240,102,.1);
+  color: #4af066;
+  border: 1px solid rgba(74,240,102,.25);
+}
+.status-pill--draft {
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+/* Editor */
+.admin-editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+.admin-editor-grid .form-group.full { grid-column: 1 / -1; }
+.admin-editor { padding: 1.8rem; }
+.admin-editor textarea.form-control { font-size: .92rem; line-height: 1.7; }
+#f-content { min-height: 340px; font-family: 'DM Sans', monospace; }
+
+.editor-hint {
+  font-size: .74rem;
+  color: rgba(255,255,255,.28);
+  margin-top: .45rem;
+  line-height: 1.6;
+}
+.editor-hint code {
+  background: rgba(255,255,255,.07);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: rgba(255,255,255,.55);
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.editor-actions-right { display: flex; gap: .7rem; flex-wrap: wrap; }
+
+.publish-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: .9rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.75);
+}
+.publish-toggle input { display: none; }
+.publish-toggle .toggle-track {
+  width: 44px; height: 24px;
+  border-radius: 100px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.15);
+  position: relative;
+  transition: background .25s, border-color .25s;
+  flex-shrink: 0;
+}
+.publish-toggle .toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform .25s var(--ease-out);
+}
+.publish-toggle input:checked + .toggle-track {
+  background: rgba(74,240,102,.35);
+  border-color: rgba(74,240,102,.5);
+}
+.publish-toggle input:checked + .toggle-track::after { transform: translateX(20px); }
+
+/* Náhled markdownu */
+.admin-preview {
+  background: var(--white);
+  color: var(--black);
+  border-radius: 14px;
+  padding: 2rem;
+  margin-top: 1.1rem;
+}
+.admin-preview .article-content { font-size: .96rem; }
+
+/* Toast */
+.admin-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: rgba(18,18,18,.97);
+  border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.9);
+  font-size: .87rem;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 13px 22px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .35s var(--ease-out), opacity .3s;
+  z-index: 1000;
+}
+.admin-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.admin-toast.error { border-color: rgba(239,68,68,.4); color: #fca5a5; }
+
+.form-error {
+  font-size: .82rem;
+  color: #f87171;
+  margin-top: .8rem;
+  display: none;
+}
+.form-error.show { display: block; }
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .blog-featured { grid-template-columns: 1fr; }
+  .blog-featured .blog-card-cover { min-height: 220px; aspect-ratio: 16 / 9; height: auto; }
+  .blog-featured .blog-card-body { padding: 1.8rem; }
+  .admin-editor-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .admin-row { flex-wrap: wrap; }
+  .admin-row-actions { width: 100%; justify-content: flex-end; }
+  .admin-login { padding: 2rem 1.5rem; margin-top: 6vh; }
+  .admin-editor { padding: 1.3rem; }
+}

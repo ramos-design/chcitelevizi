@@ -44,28 +44,47 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  const serveFile = (targetPath) => {
+    const ext = path.extname(targetPath).toLowerCase();
+    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    fs.readFile(targetPath, (readErr, data) => {
+      if (readErr) {
+        send(res, 500, 'Internal Server Error');
+        return;
+      }
+      send(res, 200, data, contentType);
+    });
+  };
+
   fs.stat(filePath, (statErr, stats) => {
     if (!statErr && stats.isFile()) {
-      const ext = path.extname(filePath).toLowerCase();
-      const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-      fs.readFile(filePath, (readErr, data) => {
-        if (readErr) {
-          send(res, 500, 'Internal Server Error');
-          return;
-        }
-        send(res, 200, data, contentType);
-      });
+      serveFile(filePath);
       return;
     }
 
-    // SPA-like fallback for unknown routes
-    const fallbackPath = path.join(ROOT_DIR, 'index.html');
-    fs.readFile(fallbackPath, (fallbackErr, data) => {
-      if (fallbackErr) {
-        send(res, 404, 'Not Found');
+    // Clean URLs: /admin -> admin.html, /blog -> blog.html (same as vercel.json)
+    const htmlPath = `${filePath}.html`;
+    fs.stat(htmlPath, (htmlErr, htmlStats) => {
+      if (!htmlErr && htmlStats.isFile()) {
+        serveFile(htmlPath);
         return;
       }
-      send(res, 200, data, 'text/html; charset=utf-8');
+
+      // Pretty article URLs: /blog/<slug> -> clanek.html (same as vercel.json)
+      if (/^\/blog\/[^/]+$/.test(pathname)) {
+        serveFile(path.join(ROOT_DIR, 'clanek.html'));
+        return;
+      }
+
+      // SPA-like fallback for unknown routes
+      const fallbackPath = path.join(ROOT_DIR, 'index.html');
+      fs.readFile(fallbackPath, (fallbackErr, data) => {
+        if (fallbackErr) {
+          send(res, 404, 'Not Found');
+          return;
+        }
+        send(res, 200, data, 'text/html; charset=utf-8');
+      });
     });
   });
 });

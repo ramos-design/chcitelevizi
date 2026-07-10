@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog CHCI TELEVIZI – rady a tipy ze světa televizí.">
+  <title>Článek – CHCI TELEVIZI Blog</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">CHCI<span>TELEVIZI</span>.cz</a>
+    <ul class="nav-links">
+      <li><a href="index.html#jak-to-funguje">Jak to funguje</a></li>
+      <li><a href="index.html#tarify">Tarify</a></li>
+      <li><a href="index.html#poradenstvi">Poradenství</a></li>
+      <li><a href="blog.html" style="color:#fff">Blog</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="index.html#kontakt" class="nav-cta">Objednat instalaci</a>
+    <button class="hamburger" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html#jak-to-funguje">Jak to funguje</a></li>
+      <li><a href="index.html#tarify">Tarify</a></li>
+      <li><a href="index.html#poradenstvi">Poradenství</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+      <li><a href="index.html#kontakt" class="mobile-cta">Objednat instalaci</a></li>
+    </ul>
+  </div>
+
+  <div id="articleRoot">
+
+    <!-- ═══════════ HLAVIČKA ČLÁNKU ═══════════ -->
+    <header class="page-hero">
+      <div class="page-hero-inner centered">
+        <a href="blog.html" class="breadcrumb">← Zpět na všechny články</a>
+        <div class="section-tag">Blog</div>
+        <h1 id="articleTitle">Načítám článek…</h1>
+        <div class="article-meta" id="articleMeta"></div>
+      </div>
+    </header>
+
+    <!-- ═══════════ OBSAH ČLÁNKU ═══════════ -->
+    <section id="clanek-body">
+      <div class="article-wrap">
+        <div class="article-cover" id="articleCover" style="display:none"></div>
+        <div class="article-content" id="articleContent">
+          <div class="blog-skeleton" style="min-height:420px"></div>
+        </div>
+        <div class="article-footer">
+          <a href="blog.html" class="breadcrumb" style="color:var(--mid);margin:0">← Zpět na všechny články</a>
+          <a href="index.html#kontakt" class="btn-primary">Objednat instalaci →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ DALŠÍ ČLÁNKY ═══════════ -->
+    <section id="dalsi-clanky">
+      <div class="section-header">
+        <div class="section-tag">Pokračujte ve čtení</div>
+        <h2 class="section-title">Další <em>články</em></h2>
+      </div>
+      <div class="blog-grid" id="moreArticles"></div>
+    </section>
+
+  </div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <a href="index.html" class="footer-logo">CHCI<span>TELEVIZI</span>.cz</a>
+    <div class="footer-links">
+      <a href="index.html#jak-to-funguje">Jak to funguje</a>
+      <a href="index.html#tarify">Tarify</a>
+      <a href="index.html#poradenstvi">Poradenství</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </div>
+    <div class="footer-copy">© 2026 ChciTelevizi.cz – Všechna práva vyhrazena</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/cms.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

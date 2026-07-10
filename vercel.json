@@ -4,6 +4,10 @@
   "outputDirectory": ".",
   "routes": [
     { "handle": "filesystem" },
+    { "src": "/blog", "dest": "/blog.html" },
+    { "src": "/blog/[^/]+", "dest": "/clanek.html" },
+    { "src": "/clanek", "dest": "/clanek.html" },
+    { "src": "/admin", "dest": "/admin.html" },
     { "src": "/.*", "dest": "/index.html" }
   ]
 }
