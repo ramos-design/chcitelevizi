@@ -36,7 +36,7 @@ html {
 
 /* Desktop: větší základ písma — vše v rem se škáluje proporcionálně */
 @media (min-width: 901px) {
-  html { font-size: 18px; }
+  html { font-size: 20px; }
 }
 
 body {
