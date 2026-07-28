@@ -156,6 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const full = document.createElement('img');
       full.src = media.currentSrc || media.src;
       full.alt = media.alt || '';
+
+      // Náhled se roztahuje podle šířky (na šířku) nebo výšky (na výšku),
+      // aby se v obou případech vešel a nezdeformoval se
+      const w = media.naturalWidth  || parseInt(media.getAttribute('width'), 10)  || 0;
+      const h = media.naturalHeight || parseInt(media.getAttribute('height'), 10) || 0;
+      if (h > w) full.classList.add('is-portrait');
+
       lightboxInner.appendChild(full);
 
       const caption = item.querySelector('.gallery-caption');

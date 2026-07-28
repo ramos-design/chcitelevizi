@@ -837,8 +837,8 @@
 .lightbox { overscroll-behavior: contain; }
 
 .lightbox-inner {
-  max-width: 82vw;
-  max-height: 82vh;
+  max-width: 88vw;
+  max-height: 88vh;
   position: relative;
   border-radius: 14px;
   overflow: hidden;
@@ -851,13 +851,17 @@
   height: auto;
   display: block;
 }
+/* Náhled fotky. Rozměr řídí jen jedna osa (druhá je auto), takže se poměr stran
+   nikdy nezlomí; limity 88vw / 86vh jsou přepočtené i na druhou osu, aby se
+   fotka vešla do okna bez dalšího max-*, které by ji zdeformovalo. */
 .lightbox-inner img {
   display: block;
-  /* Fotky jsou z mobilu (max 780 px) – v náhledu je neroztahujeme, jinak by změkly */
-  width: auto;
+  width: min(920px, 88vw, 114vh);   /* 114vh ≈ 86vh × 4/3 pro fotky na šířku */
   height: auto;
-  max-width: 82vw;
-  max-height: 82vh;
+}
+.lightbox-inner img.is-portrait {
+  width: auto;
+  height: min(800px, 86vh, 117vw);  /* 117vw ≈ 88vw × 4/3 pro fotky na výšku */
 }
 .lightbox-caption {
   position: absolute;
