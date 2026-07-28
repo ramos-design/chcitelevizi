@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fa">
   <meta name="robots" content="noindex, nofollow">
   <title>Administrace blogu – CHCI TELEVIZI</title>
 
@@ -13,9 +14,9 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/main.css?v=2">
-  <link rel="stylesheet" href="css/components.css?v=2">
-  <link rel="stylesheet" href="css/blog.css?v=2">
+  <link rel="stylesheet" href="css/main.css?v=3">
+  <link rel="stylesheet" href="css/components.css?v=3">
+  <link rel="stylesheet" href="css/blog.css?v=3">
 </head>
 
 <body class="admin-body">
@@ -25,7 +26,7 @@
     <!-- ═══════════ TOPBAR ═══════════ -->
     <div class="admin-topbar">
       <a href="index.html" class="nav-logo">CHCI<span>TELEVIZI</span>.cz <span
-          style="color:rgba(255,255,255,.35);font-weight:500;font-size:.8rem;margin-left:8px">/ administrace</span></a>
+          style="color:var(--mid);font-weight:500;font-size:.8rem;margin-left:8px">/ administrace</span></a>
       <div class="admin-topbar-actions" id="topbarActions" hidden>
         <span class="admin-user-email" id="userEmail"></span>
         <a href="blog.html" class="admin-btn admin-btn--ghost admin-btn--sm" target="_blank" rel="noopener">Zobrazit
@@ -64,7 +65,7 @@
         </div>
         <div class="admin-list" id="postList">
           <div class="admin-row"><div class="admin-row-main"><div class="admin-row-title"
-                style="color:rgba(255,255,255,.4)">Načítám…</div></div></div>
+                style="color:var(--mid)">Načítám…</div></div></div>
         </div>
       </div>
     </div>
@@ -96,7 +97,7 @@
               <label for="f-cover">Úvodní obrázek (URL)</label>
               <input type="url" id="f-cover" class="form-control" placeholder="https://…">
               <div class="editor-hint">Odkaz na obrázek, např. z <a href="https://www.pexels.com" target="_blank"
-                  rel="noopener" style="color:rgba(255,255,255,.5);text-decoration:underline">pexels.com</a>. Nepovinné.
+                  rel="noopener" style="color:var(--accent-ink);text-decoration:underline">pexels.com</a>. Nepovinné.
               </div>
             </div>
             <div class="form-group full">

@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
           src="https://images.pexels.com/photos/34153693/pexels-photo-34153693.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop"
           alt="Moderní domácí kino s velkým TV a reproduktory v obývacím pokoji"
           class="hero-photo"
+          width="1200"
+          height="900"
+          fetchpriority="high"
           loading="eager"
           decoding="async"
         />
@@ -144,10 +147,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const item = galleryItems[index];
     if (!item || !lightbox || !lightboxInner) return;
 
-    const svgEl = item.querySelector('svg');
-    if (!svgEl) return;
+    const media = item.querySelector('img, svg');
+    if (!media) return;
 
-    lightboxInner.innerHTML = svgEl.outerHTML;
+    lightboxInner.innerHTML = '';
+
+    if (media.tagName.toLowerCase() === 'img') {
+      const full = document.createElement('img');
+      full.src = media.currentSrc || media.src;
+      full.alt = media.alt || '';
+      lightboxInner.appendChild(full);
+
+      const caption = item.querySelector('.gallery-caption');
+      if (caption) {
+        const cap = document.createElement('div');
+        cap.className = 'lightbox-caption';
+        cap.textContent = caption.textContent;
+        lightboxInner.appendChild(cap);
+      }
+    } else {
+      lightboxInner.innerHTML = media.outerHTML;
+    }
+
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
 
@@ -206,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
       required.forEach((field) => {
         field.style.borderColor = '';
         if (!field.value.trim()) {
-          field.style.borderColor = '#ef4444';
+          field.style.borderColor = 'var(--red)';
           valid = false;
         }
       });
@@ -225,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = '✓ Odesláno! Ozveme se do 2 hodin.';
-          submitBtn.style.background = '#22c55e';
+          submitBtn.style.background = 'var(--green)';
         }
         setTimeout(() => {
           if (submitBtn) {

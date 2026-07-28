@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .order('created_at', { ascending: false });
 
     if (error) {
-      listEl.innerHTML = '<div class="admin-row"><div class="admin-row-main"><div class="admin-row-title" style="color:#f87171">Články se nepodařilo načíst. Máte oprávnění správce?</div></div></div>';
+      listEl.innerHTML = '<div class="admin-row"><div class="admin-row-main"><div class="admin-row-title" style="color:var(--red)">Články se nepodařilo načíst. Máte oprávnění správce?</div></div></div>';
       return;
     }
 
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('postCount').textContent = `${data.length} článků celkem · ${published} publikováno · ${data.length - published} konceptů`;
 
     if (!data.length) {
-      listEl.innerHTML = '<div class="admin-row"><div class="admin-row-main"><div class="admin-row-title" style="color:rgba(255,255,255,.4)">Zatím žádné články. Vytvořte první tlačítkem „+ Nový článek“.</div></div></div>';
+      listEl.innerHTML = '<div class="admin-row"><div class="admin-row-main"><div class="admin-row-title" style="color:var(--mid)">Zatím žádné články. Vytvořte první tlačítkem „+ Nový článek“.</div></div></div>';
       return;
     }
 
