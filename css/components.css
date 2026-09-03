@@ -372,10 +372,10 @@
 .pricing-card.featured .price-amount { color: var(--on-ink); }
 
 .price-currency {
-  font-size: 1rem;
-  font-weight: 500;
-  vertical-align: super;
+  font-size: 1.3rem;
+  font-weight: 600;
   letter-spacing: 0;
+  margin-left: .3rem;
 }
 .price-note {
   font-size: .8rem;
@@ -595,6 +595,30 @@
   letter-spacing: .04em;
   border: 1px solid rgba(232,92,46,.42);
 }
+
+.adv-tag.paid {
+  background: rgba(120,170,225,.16);
+  color: #9dc2e8;
+  border-color: rgba(120,170,225,.4);
+}
+.adv-item.is-result {
+  background: rgba(232,92,46,.13);
+  border-color: rgba(232,92,46,.42);
+}
+.adv-item.is-result .adv-tag {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.advisory-card-foot {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.3rem;
+  font-size: .78rem;
+  line-height: 1.55;
+  color: var(--on-ink-3);
+}
+.advisory-card-foot strong { color: var(--on-ink-2); font-weight: 600; }
 
 .advisory-content .section-desc { margin-bottom: 1.8rem; }
 .advisory-content .check-list li { color: var(--ink-2); }
@@ -995,7 +1019,9 @@
   border: 1px solid var(--line-strong);
   border-radius: 10px;
   padding: 12px 15px;
+  font-family: inherit;
   font-size: .93rem;
+  line-height: 1.5;
   color: var(--black);
   outline: none;
   transition: border-color .2s, background .2s, box-shadow .2s;
@@ -1047,6 +1073,101 @@ textarea.form-control { resize: vertical; min-height: 88px; }
   box-shadow: 0 10px 30px rgba(232, 92, 46, .38);
 }
 .form-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.form-note {
+  font-size: .78rem;
+  color: var(--mid);
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.55;
+}
+
+.label-optional {
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-4);
+}
+
+/* ── Výběr tarifu (radio dlaždice) ── */
+.tarif-choice {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .6rem;
+}
+.tarif-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.tarif-option:hover { border-color: var(--accent); }
+.tarif-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.tarif-option-name {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+.tarif-option-name em {
+  font-style: normal;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(232,92,46,.1);
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+.tarif-option-price {
+  font-size: .78rem;
+  color: var(--mid);
+}
+.tarif-option:has(input:checked) {
+  border-color: var(--accent);
+  background: rgba(232,92,46,.06);
+  box-shadow: 0 0 0 1px var(--accent) inset;
+}
+.tarif-option:has(input:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+.tarif-option-wide { grid-column: 1 / -1; }
+
+.tarif-choice.has-error .tarif-option { border-color: var(--red); }
+
+/* ── Souhlas se zpracováním údajů ── */
+.form-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: .65rem;
+  margin-top: 1.4rem;
+  font-size: .82rem;
+  line-height: 1.55;
+  color: var(--mid);
+  cursor: pointer;
+}
+.form-consent input {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.form-consent.has-error span { color: var(--red); }
 .auth-cta-box {
   background: var(--ink-surface);
   border: 1px solid rgba(22,26,34,.9);
@@ -1551,7 +1672,142 @@ textarea.form-control { resize: vertical; min-height: 88px; }
 }
 .pg-restart:hover { color: var(--black); }
 
+/* ── CENÍK: volitelné příplatky ── */
+.pricing-extras {
+  margin-top: 2.4rem;
+  padding: 1.6rem 1.8rem;
+  border: 1px dashed var(--border);
+  border-radius: 18px;
+  background: var(--cream);
+}
+.pricing-extras-label {
+  font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--black); margin-bottom: 1rem;
+}
+.pricing-extras-list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: .55rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.pricing-extras-list li {
+  position: relative; padding-left: 1.35rem;
+  font-size: .9rem; line-height: 1.5; color: var(--ink-2);
+}
+.pricing-extras-list li::before {
+  content: '+'; position: absolute; left: 0; top: -1px;
+  color: var(--accent); font-weight: 800;
+}
+.pricing-extras-list span {
+  display: block; font-size: .78rem; color: var(--mid); margin-top: 1px;
+}
+.pricing-extras-note {
+  margin-top: 1.1rem; padding-top: .9rem;
+  border-top: 1px solid var(--border);
+  font-size: .82rem; line-height: 1.6; color: var(--mid);
+}
+.pricing-extras-note a {
+  color: var(--accent-ink); font-weight: 600; text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pricing-extras-note a:hover { color: var(--accent-dark); }
+
+@media (max-width: 640px) {
+  .pricing-extras { padding: 1.3rem 1.2rem; border-radius: 14px; }
+}
+
+/* ── VÝSLEDEK: mezinadpisy, tarif, příplatky ── */
+.pg-result-sub {
+  font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mid); margin: 0 0 .7rem;
+}
+.pg-result-grid + .pg-result-sub { margin-top: 1.6rem; }
+
+.pg-reco-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}
+.pg-reco-pricebox { text-align: right; flex-shrink: 0; }
+.pg-reco-price {
+  font-size: 1.45rem; font-weight: 800; color: var(--on-ink);
+  margin-bottom: 0; line-height: 1.1;
+}
+.pg-reco-pricenote { font-size: .74rem; color: var(--on-ink-3); margin-top: 2px; }
+.pg-reco-desc { margin-top: .9rem; }
+
+.pg-reco-why {
+  margin-top: 1rem;
+  padding: .85rem 1rem;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+}
+.pg-reco-why-label {
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent-on-ink); margin-bottom: .4rem;
+}
+.pg-reco-why ul { list-style: none; margin: 0; padding: 0; }
+.pg-reco-why li {
+  position: relative; padding-left: 1.1rem; margin-top: .35rem;
+  font-size: .86rem; line-height: 1.5; color: var(--on-ink-2);
+}
+.pg-reco-why li::before {
+  content: '→'; position: absolute; left: 0; color: var(--accent-on-ink);
+}
+
+.pg-reco-incl-label {
+  margin-top: 1.1rem; margin-bottom: .5rem;
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--on-ink-3);
+}
+.pg-reco-incl { list-style: none; margin: 0; padding: 0; }
+.pg-reco-incl li {
+  position: relative; padding-left: 1.35rem; margin-top: .38rem;
+  font-size: .875rem; line-height: 1.5; color: var(--on-ink-2);
+}
+.pg-reco-incl li::before {
+  content: '✓'; position: absolute; left: 0; top: -1px;
+  color: var(--accent-on-ink); font-weight: 700; font-size: .82rem;
+}
+
+.pg-extras {
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1.4rem;
+  background: var(--cream);
+}
+.pg-extras-label {
+  font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--black);
+}
+.pg-extras-sub { font-size: .8rem; color: var(--mid); margin-top: 2px; margin-bottom: .8rem; }
+.pg-extra {
+  display: flex; align-items: flex-start; gap: .7rem;
+  padding-top: .65rem; margin-top: .65rem;
+  border-top: 1px solid var(--border);
+}
+.pg-extra:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+.pg-extra-emoji { font-size: 1.15rem; flex-shrink: 0; line-height: 1.3; }
+.pg-extra-title { font-size: .92rem; font-weight: 600; color: var(--black); }
+.pg-extra-desc { font-size: .8rem; line-height: 1.5; color: var(--mid); margin-top: 2px; }
+
+/* Zvýraznění tarifu, na který průvodce odkázal */
+.pricing-card.spotlight,
+.support-banner.spotlight {
+  animation: tarifSpotlight 2.6s var(--ease-out);
+}
+@keyframes tarifSpotlight {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,92,46,0); }
+  12%, 70% { box-shadow: 0 0 0 3px rgba(232,92,46,.55), 0 18px 44px rgba(232,92,46,.22); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card.spotlight,
+  .support-banner.spotlight { animation: none; box-shadow: 0 0 0 3px rgba(232,92,46,.55); }
+}
+
 @media (max-width: 520px) {
   .pg-question { font-size: 1.2rem; }
   .pg-options.cols-2 { grid-template-columns: 1fr; }
+  .pg-reco-top { flex-direction: column; gap: .5rem; }
+  .pg-reco-pricebox { text-align: left; }
 }

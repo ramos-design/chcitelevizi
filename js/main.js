@@ -224,24 +224,57 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── CONTACT FORM ── */
   const form = document.getElementById('contactForm');
   if (form) {
+    const tarifChoice = document.getElementById('tarifChoice');
+    const gdprWrap = document.getElementById('gdprWrap');
+    const gdpr = document.getElementById('gdpr');
+
+    const markError = (field) => { field.style.borderColor = 'var(--red)'; };
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Basic validation
-      const required = form.querySelectorAll('[required]');
       let valid = true;
+      let firstInvalid = null;
 
-      required.forEach((field) => {
+      form.querySelectorAll('.form-control[required]').forEach((field) => {
         field.style.borderColor = '';
-        if (!field.value.trim()) {
-          field.style.borderColor = 'var(--red)';
+        const empty = !field.value.trim();
+        const badEmail = field.type === 'email' && field.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+        if (empty || badEmail) {
+          markError(field);
           valid = false;
+          if (!firstInvalid) firstInvalid = field;
         }
       });
 
-      if (!valid) return;
+      // Tarif – musí být vybraná jedna z dlaždic
+      if (tarifChoice) {
+        const chosen = form.querySelector('input[name="tarif"]:checked');
+        tarifChoice.classList.toggle('has-error', !chosen);
+        if (!chosen) {
+          valid = false;
+          if (!firstInvalid) firstInvalid = tarifChoice;
+        }
+      }
 
-      // Simulate submission
+      // Souhlas se zpracováním údajů
+      if (gdpr) {
+        gdprWrap.classList.toggle('has-error', !gdpr.checked);
+        if (!gdpr.checked) {
+          valid = false;
+          if (!firstInvalid) firstInvalid = gdprWrap;
+        }
+      }
+
+      if (!valid) {
+        if (firstInvalid) {
+          firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (typeof firstInvalid.focus === 'function') firstInvalid.focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      // Simulace odeslání
       const submitBtn = form.querySelector('.form-submit');
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -250,6 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       setTimeout(() => {
         form.reset();
+        if (tarifChoice) tarifChoice.classList.remove('has-error');
+        if (gdprWrap) gdprWrap.classList.remove('has-error');
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = '✓ Odesláno! Ozveme se do 2 hodin.';
@@ -264,10 +299,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1200);
     });
 
-    // Clear red border on input
+    // Chybové zvýraznění zmizí, jakmile uživatel začne opravovat
     form.querySelectorAll('.form-control').forEach((field) => {
-      field.addEventListener('input', () => {
-        field.style.borderColor = '';
+      field.addEventListener('input', () => { field.style.borderColor = ''; });
+      field.addEventListener('change', () => { field.style.borderColor = ''; });
+    });
+    if (tarifChoice) {
+      tarifChoice.addEventListener('change', () => tarifChoice.classList.remove('has-error'));
+    }
+    if (gdpr) {
+      gdpr.addEventListener('change', () => gdprWrap.classList.remove('has-error'));
+    }
+
+    // Tlačítka v ceníku předvyplní odpovídající tarif
+    document.querySelectorAll('.pricing-btn[data-tarif]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const wanted = btn.dataset.tarif;
+        const radio = [...form.querySelectorAll('input[name="tarif"]')]
+          .find((r) => r.value.split(/\s+[–(]/)[0].trim() === wanted);
+        if (radio) {
+          radio.checked = true;
+          if (tarifChoice) tarifChoice.classList.remove('has-error');
+        }
       });
     });
   }
