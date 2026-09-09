@@ -636,6 +636,7 @@
         <a href="#kontakt" class="btn-primary" data-guide-go>Poptat ${r.pkg.name} nezávazně →</a>
         <a href="#tarify" class="btn-secondary" data-guide-tarif="${r.pkg.anchor}">Zobrazit tarif v ceníku</a>
       </div>
+      <div class="pg-result-phone">Raději osobně? Zavolejte <a href="tel:+420777660900">+420 777 660 900</a></div>
       <button type="button" class="pg-restart">↺ Spustit průvodce znovu</button>
     `;
     body.scrollTop = 0;

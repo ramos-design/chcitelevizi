@@ -179,6 +179,26 @@ h1, h2, h3 {
 }
 .nav-links a:hover { color: var(--black); }
 
+.nav-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--black);
+  white-space: nowrap;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color .2s, background .2s;
+}
+.nav-phone svg {
+  width: 15px; height: 15px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.nav-phone:hover { color: var(--accent); background: rgba(232,92,46,.08); }
+
 .nav-cta {
   background: var(--accent-btn);
   color: #fff;
@@ -249,6 +269,12 @@ h1, h2, h3 {
   opacity: 1;
   pointer-events: auto;
 }
+.mobile-phone {
+  display: block;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+}
+
 .mobile-menu ul {
   list-style: none;
   display: flex;
@@ -1317,6 +1343,24 @@ footer {
   transition: color .2s;
 }
 .footer-links a:hover { color: var(--on-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+.footer-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--on-ink);
+  white-space: nowrap;
+  transition: color .2s;
+}
+.footer-phone svg {
+  width: 16px; height: 16px;
+  fill: none;
+  stroke: var(--accent-on-ink);
+  stroke-width: 2;
+}
+.footer-phone:hover { color: var(--accent-on-ink); }
 
 .footer-copy {
   font-size: .78rem;

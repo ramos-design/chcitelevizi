@@ -509,8 +509,8 @@
   background: var(--ink-surface);
   border: 1px solid rgba(22,26,34,.9);
   color: var(--on-ink);
-  border-radius: 20px;
-  padding: 2.8rem 2.4rem;
+  border-radius: 18px;
+  padding: 1.9rem 1.6rem;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -537,16 +537,16 @@
 
 .advisory-card-title {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.08rem;
   color: var(--on-ink);
   position: relative;
   z-index: 1;
   letter-spacing: -.02em;
 }
 .advisory-card-sub {
-  font-size: .82rem;
+  font-size: .78rem;
   color: var(--on-ink-3);
-  margin-top: .35rem;
+  margin-top: .25rem;
   position: relative;
   z-index: 1;
 }
@@ -554,20 +554,20 @@
 .advisory-cards-list {
   display: flex;
   flex-direction: column;
-  gap: .85rem;
-  margin-top: 1.8rem;
+  gap: .45rem;
+  margin-top: 1.1rem;
   position: relative;
   z-index: 1;
 }
 
 .adv-item {
   background: var(--ink-surface-2);
-  border-radius: 12px;
-  padding: 1rem 1.1rem;
+  border-radius: 10px;
+  padding: .6rem .8rem;
   display: flex;
   align-items: center;
-  gap: .9rem;
-  font-size: .875rem;
+  gap: .7rem;
+  font-size: .82rem;
   border: 1px solid var(--ink-line);
   cursor: pointer;
   transition: background .25s, border-color .25s, transform .25s var(--ease-out);
@@ -578,17 +578,17 @@
   transform: translateX(2px);
 }
 
-.adv-icon { font-size: 1.3rem; flex-shrink: 0; }
-.adv-text { font-weight: 600; color: var(--on-ink); }
-.adv-sub  { font-size: .76rem; color: var(--on-ink-3); margin-top: 2px; }
+.adv-icon { font-size: 1.05rem; flex-shrink: 0; }
+.adv-text { font-weight: 600; color: var(--on-ink); line-height: 1.3; }
+.adv-sub  { font-size: .71rem; color: var(--on-ink-3); margin-top: 1px; line-height: 1.35; }
 
 .adv-tag {
   margin-left: auto;
-  font-size: .68rem;
+  font-size: .62rem;
   font-weight: 700;
   background: rgba(232,92,46,.18);
   color: var(--accent-on-ink);
-  padding: 3px 9px;
+  padding: 2px 7px;
   border-radius: 4px;
   white-space: nowrap;
   flex-shrink: 0;
@@ -613,9 +613,9 @@
 .advisory-card-foot {
   position: relative;
   z-index: 1;
-  margin-top: 1.3rem;
-  font-size: .78rem;
-  line-height: 1.55;
+  margin-top: .9rem;
+  font-size: .72rem;
+  line-height: 1.5;
   color: var(--on-ink-3);
 }
 .advisory-card-foot strong { color: var(--on-ink-2); font-weight: 600; }
@@ -977,6 +977,8 @@
 }
 .contact-label { font-size: .75rem; color: var(--mid); letter-spacing: .06em; text-transform: uppercase; }
 .contact-value { font-size: .95rem; color: var(--black); font-weight: 600; margin-top: 2px; }
+.contact-value a { color: inherit; transition: color .2s; }
+.contact-value a:hover { color: var(--accent); }
 
 .contact-form {
   background: var(--card-bg);
@@ -1664,11 +1666,20 @@ textarea.form-control { resize: vertical; min-height: 88px; }
 .pg-result-actions { display: flex; flex-wrap: wrap; gap: .7rem; }
 .pg-result-actions .btn-primary,
 .pg-result-actions .btn-secondary { flex: 1 1 180px; text-align: center; }
+.pg-result-phone {
+  text-align: center;
+  font-size: .85rem;
+  color: var(--mid);
+  margin-top: 1rem;
+}
+.pg-result-phone a { color: var(--accent); font-weight: 700; white-space: nowrap; }
+.pg-result-phone a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
 .pg-restart {
   display: block; width: 100%; text-align: center;
   background: none; border: none; font-family: inherit;
   font-size: .88rem; color: var(--mid); cursor: pointer;
-  margin-top: 1rem; padding: .4rem;
+  margin-top: .5rem; padding: .4rem;
 }
 .pg-restart:hover { color: var(--black); }
 

@@ -20,6 +20,7 @@
   /* Nav */
   .nav-links { display: none; }
   .nav-cta   { display: none; }
+  .nav-phone { display: none; }
   .hamburger { display: flex; }
   .mobile-menu { display: block; }
 
