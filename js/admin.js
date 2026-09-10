@@ -53,7 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
     el.classList.toggle('show', Boolean(msg));
   }
 
-  /* ── AUTENTIZACE ── */
+  function setNotice(id, msg) {
+    const el = $(id);
+    el.textContent = msg || '';
+    el.classList.toggle('show', Boolean(msg));
+  }
+
+  /* ── AUTENTIZACE (magic link – přihlášení bez hesla) ── */
+
+  /* Adresa, na kterou se administrátor vrátí po kliknutí na odkaz v e-mailu.
+     Musí být povolená v Supabase → Authentication → URL Configuration → Redirect URLs. */
+  const LOGIN_REDIRECT = window.location.origin + window.location.pathname;
+
+  function clearUrlHash() {
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }
 
   async function refreshAuth() {
     const { data: { session } } = await cmsClient.auth.getSession();
@@ -68,26 +84,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* Odkaz z e-mailu může skončit chybou (vypršel, byl už použit) – Supabase ji
+     vrátí v hashi adresy. */
+  function reportLinkError() {
+    const hash = window.location.hash.slice(1);
+    if (!hash.includes('error')) return;
+    const params = new URLSearchParams(hash);
+    const code = params.get('error_code') || params.get('error') || '';
+    if (!code) return;
+    clearUrlHash();
+    setError('loginError', /expired|otp_expired/i.test(code)
+      ? 'Přihlašovací odkaz vypršel nebo už byl použitý. Nechte si prosím poslat nový.'
+      : 'Přihlášení se nezdařilo: ' + (params.get('error_description') || code));
+  }
+
   $('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     setError('loginError', '');
+    setNotice('loginNotice', '');
     const btn = $('loginSubmit');
+    const email = $('loginEmail').value.trim();
     btn.disabled = true;
-    btn.textContent = 'Přihlašuji…';
+    btn.textContent = 'Odesílám…';
 
-    const { error } = await cmsClient.auth.signInWithPassword({
-      email: $('loginEmail').value.trim(),
-      password: $('loginPassword').value,
+    const { error } = await cmsClient.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: LOGIN_REDIRECT,
+        shouldCreateUser: false,   // přihlásit se může jen existující účet administrátora
+      },
     });
 
     btn.disabled = false;
-    btn.textContent = 'Přihlásit se →';
+    btn.textContent = 'Poslat přihlašovací odkaz →';
 
     if (error) {
-      setError('loginError', 'Přihlášení se nezdařilo. Zkontrolujte e-mail a heslo.');
+      setError('loginError', /rate|second/i.test(error.message)
+        ? 'Odkaz jsme právě odeslali. Zkuste to prosím za chvíli znovu.'
+        : 'Odkaz se nepodařilo odeslat. Zkontrolujte, že e-mail patří k účtu administrátora.');
       return;
     }
-    refreshAuth();
+    setNotice('loginNotice', 'Hotovo – na ' + email + ' jsme poslali přihlašovací odkaz. Otevřete ho na tomto zařízení, platí 60 minut.');
+  });
+
+  /* Po návratu z e-mailového odkazu vytvoří supabase-js session sám;
+     tady jen překreslíme obrazovku a uklidíme tokeny z adresního řádku. */
+  cmsClient.auth.onAuthStateChange((event) => {
+    if (event !== 'SIGNED_IN' && event !== 'SIGNED_OUT') return;
+    setTimeout(() => {
+      clearUrlHash();
+      setNotice('loginNotice', '');
+      setError('loginError', '');
+      refreshAuth();
+    }, 0);
   });
 
   $('btnLogout').addEventListener('click', async () => {
@@ -271,5 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ── START ── */
+  reportLinkError();
   refreshAuth();
 });

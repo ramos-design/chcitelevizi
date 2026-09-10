@@ -675,6 +675,19 @@
 }
 .form-error.show { display: block; }
 
+.form-notice {
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--green);
+  background: rgba(21,135,68,.07);
+  border: 1px solid rgba(21,135,68,.22);
+  border-radius: 10px;
+  padding: .7rem .85rem;
+  margin-top: .9rem;
+  display: none;
+}
+.form-notice.show { display: block; }
+
 /* ════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════ */
