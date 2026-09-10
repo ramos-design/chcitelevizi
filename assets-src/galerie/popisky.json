@@ -1,0 +1,44 @@
+{
+  "_comment": "Popisky galerie. Klíč = název souboru bez přípony v této složce. Pořadí v galerii určuje pořadí klíčů. Po úpravě spusť tools/build-gallery.py a tools/patch-gallery-html.py.",
+
+  "07-oled-zavesna-komoda": {
+    "alt": "Velkoformátová OLED televize na zdi nad závěsnou dřevěnou komodou",
+    "caption": "✨ OLED nad závěsnou komodou – čistý interiér"
+  },
+  "01-lamelova-stena-obyvak": {
+    "alt": "Televize zapuštěná do dřevěné lamelové stěny v obývacím pokoji",
+    "caption": "🪵 TV v dřevěné lamelové stěně"
+  },
+  "08-hifi-pohledovy-beton": {
+    "alt": "Televize na pohledovém betonu se sloupovými reproduktory a zesilovači",
+    "caption": "🏛️ Hi-fi sestava na pohledovém betonu"
+  },
+  "05-domaci-kino-gramofon": {
+    "alt": "Domácí kino s televizí na zdi, gramofonem, centrálním kanálem a subwooferem",
+    "caption": "🎬 Domácí kino s gramofonem a subwooferem"
+  },
+  "10-kef-sestava-obyvak": {
+    "alt": "Televize na komodě se sloupovými reproduktory KEF a centrálním kanálem",
+    "caption": "🔊 Sestava KEF s centrálním kanálem"
+  },
+  "06-tv-na-tapete": {
+    "alt": "Televize na zdi s tapetou, kabeláž skrytá ve zdi, hi-fi zesilovač a gramofon",
+    "caption": "🧩 Montáž na tapetu – bez viditelné kabeláže"
+  },
+  "02-tv-loznice-lamely": {
+    "alt": "Televize v ložnici na dřevěné lamelové stěně",
+    "caption": "🛏️ Televize v ložnici na lamelové stěně"
+  },
+  "03-tv-stojan-u-okna": {
+    "alt": "Televize na mobilním stojanu u prosklené stěny s výhledem",
+    "caption": "🧭 TV na mobilním stojanu u okna"
+  },
+  "04-hifi-sloupove-reproduktory": {
+    "alt": "Televize v obývací stěně se sloupovými reproduktory a AV rackem",
+    "caption": "🔊 Sloupové reproduktory a AV rack"
+  },
+  "09-tv-knihovni-stena": {
+    "alt": "Televize v knihovní stěně s bílou AV komodou a gramofonem",
+    "caption": "📚 Televize v knihovní stěně s AV komodou"
+  }
+}

@@ -1,0 +1,322 @@
+[
+  {
+    "name": "07-oled-zavesna-komoda",
+    "source": "assets-src/galerie/07-oled-zavesna-komoda.jpg",
+    "source_w": 4032,
+    "source_h": 3024,
+    "variants": [
+      {
+        "w": 560,
+        "h": 420,
+        "path": "img/galerie/07-oled-zavesna-komoda-w560.webp",
+        "bytes": 15646
+      },
+      {
+        "w": 1100,
+        "h": 825,
+        "path": "img/galerie/07-oled-zavesna-komoda-w1100.webp",
+        "bytes": 49590
+      },
+      {
+        "w": 1920,
+        "h": 1440,
+        "path": "img/galerie/07-oled-zavesna-komoda-w1920.webp",
+        "bytes": 128926
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 825,
+      "path": "img/galerie/07-oled-zavesna-komoda-w1100.jpg",
+      "bytes": 98043
+    }
+  },
+  {
+    "name": "01-lamelova-stena-obyvak",
+    "source": "assets-src/galerie/01-lamelova-stena-obyvak.jpg",
+    "source_w": 2246,
+    "source_h": 1500,
+    "variants": [
+      {
+        "w": 560,
+        "h": 374,
+        "path": "img/galerie/01-lamelova-stena-obyvak-w560.webp",
+        "bytes": 25482
+      },
+      {
+        "w": 1100,
+        "h": 735,
+        "path": "img/galerie/01-lamelova-stena-obyvak-w1100.webp",
+        "bytes": 68764
+      },
+      {
+        "w": 1920,
+        "h": 1282,
+        "path": "img/galerie/01-lamelova-stena-obyvak-w1920.webp",
+        "bytes": 157324
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 735,
+      "path": "img/galerie/01-lamelova-stena-obyvak-w1100.jpg",
+      "bytes": 119329
+    }
+  },
+  {
+    "name": "08-hifi-pohledovy-beton",
+    "source": "assets-src/galerie/08-hifi-pohledovy-beton.jpg",
+    "source_w": 4032,
+    "source_h": 3024,
+    "variants": [
+      {
+        "w": 560,
+        "h": 420,
+        "path": "img/galerie/08-hifi-pohledovy-beton-w560.webp",
+        "bytes": 23968
+      },
+      {
+        "w": 1100,
+        "h": 825,
+        "path": "img/galerie/08-hifi-pohledovy-beton-w1100.webp",
+        "bytes": 71060
+      },
+      {
+        "w": 1920,
+        "h": 1440,
+        "path": "img/galerie/08-hifi-pohledovy-beton-w1920.webp",
+        "bytes": 172018
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 825,
+      "path": "img/galerie/08-hifi-pohledovy-beton-w1100.jpg",
+      "bytes": 127702
+    }
+  },
+  {
+    "name": "05-domaci-kino-gramofon",
+    "source": "assets-src/galerie/05-domaci-kino-gramofon.jpg",
+    "source_w": 4032,
+    "source_h": 3024,
+    "variants": [
+      {
+        "w": 560,
+        "h": 420,
+        "path": "img/galerie/05-domaci-kino-gramofon-w560.webp",
+        "bytes": 17162
+      },
+      {
+        "w": 1100,
+        "h": 825,
+        "path": "img/galerie/05-domaci-kino-gramofon-w1100.webp",
+        "bytes": 50028
+      },
+      {
+        "w": 1920,
+        "h": 1440,
+        "path": "img/galerie/05-domaci-kino-gramofon-w1920.webp",
+        "bytes": 134850
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 825,
+      "path": "img/galerie/05-domaci-kino-gramofon-w1100.jpg",
+      "bytes": 104690
+    }
+  },
+  {
+    "name": "10-kef-sestava-obyvak",
+    "source": "assets-src/galerie/10-kef-sestava-obyvak.jpg",
+    "source_w": 4032,
+    "source_h": 3024,
+    "variants": [
+      {
+        "w": 560,
+        "h": 420,
+        "path": "img/galerie/10-kef-sestava-obyvak-w560.webp",
+        "bytes": 15968
+      },
+      {
+        "w": 1100,
+        "h": 825,
+        "path": "img/galerie/10-kef-sestava-obyvak-w1100.webp",
+        "bytes": 46644
+      },
+      {
+        "w": 1920,
+        "h": 1440,
+        "path": "img/galerie/10-kef-sestava-obyvak-w1920.webp",
+        "bytes": 105388
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 825,
+      "path": "img/galerie/10-kef-sestava-obyvak-w1100.jpg",
+      "bytes": 92527
+    }
+  },
+  {
+    "name": "06-tv-na-tapete",
+    "source": "assets-src/galerie/06-tv-na-tapete.jpg",
+    "source_w": 4032,
+    "source_h": 3024,
+    "variants": [
+      {
+        "w": 560,
+        "h": 420,
+        "path": "img/galerie/06-tv-na-tapete-w560.webp",
+        "bytes": 35958
+      },
+      {
+        "w": 1100,
+        "h": 825,
+        "path": "img/galerie/06-tv-na-tapete-w1100.webp",
+        "bytes": 132618
+      },
+      {
+        "w": 1920,
+        "h": 1440,
+        "path": "img/galerie/06-tv-na-tapete-w1920.webp",
+        "bytes": 369752
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 825,
+      "path": "img/galerie/06-tv-na-tapete-w1100.jpg",
+      "bytes": 183600
+    }
+  },
+  {
+    "name": "02-tv-loznice-lamely",
+    "source": "assets-src/galerie/02-tv-loznice-lamely.jpg",
+    "source_w": 2246,
+    "source_h": 1500,
+    "variants": [
+      {
+        "w": 560,
+        "h": 374,
+        "path": "img/galerie/02-tv-loznice-lamely-w560.webp",
+        "bytes": 24560
+      },
+      {
+        "w": 1100,
+        "h": 735,
+        "path": "img/galerie/02-tv-loznice-lamely-w1100.webp",
+        "bytes": 71902
+      },
+      {
+        "w": 1920,
+        "h": 1282,
+        "path": "img/galerie/02-tv-loznice-lamely-w1920.webp",
+        "bytes": 177234
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 735,
+      "path": "img/galerie/02-tv-loznice-lamely-w1100.jpg",
+      "bytes": 127692
+    }
+  },
+  {
+    "name": "03-tv-stojan-u-okna",
+    "source": "assets-src/galerie/03-tv-stojan-u-okna.jpg",
+    "source_w": 4032,
+    "source_h": 3024,
+    "variants": [
+      {
+        "w": 560,
+        "h": 420,
+        "path": "img/galerie/03-tv-stojan-u-okna-w560.webp",
+        "bytes": 37852
+      },
+      {
+        "w": 1100,
+        "h": 825,
+        "path": "img/galerie/03-tv-stojan-u-okna-w1100.webp",
+        "bytes": 141300
+      },
+      {
+        "w": 1920,
+        "h": 1440,
+        "path": "img/galerie/03-tv-stojan-u-okna-w1920.webp",
+        "bytes": 379894
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 825,
+      "path": "img/galerie/03-tv-stojan-u-okna-w1100.jpg",
+      "bytes": 189280
+    }
+  },
+  {
+    "name": "04-hifi-sloupove-reproduktory",
+    "source": "assets-src/galerie/04-hifi-sloupove-reproduktory.jpg",
+    "source_w": 4032,
+    "source_h": 3024,
+    "variants": [
+      {
+        "w": 560,
+        "h": 420,
+        "path": "img/galerie/04-hifi-sloupove-reproduktory-w560.webp",
+        "bytes": 30284
+      },
+      {
+        "w": 1100,
+        "h": 825,
+        "path": "img/galerie/04-hifi-sloupove-reproduktory-w1100.webp",
+        "bytes": 94440
+      },
+      {
+        "w": 1920,
+        "h": 1440,
+        "path": "img/galerie/04-hifi-sloupove-reproduktory-w1920.webp",
+        "bytes": 248162
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 825,
+      "path": "img/galerie/04-hifi-sloupove-reproduktory-w1100.jpg",
+      "bytes": 149706
+    }
+  },
+  {
+    "name": "09-tv-knihovni-stena",
+    "source": "assets-src/galerie/09-tv-knihovni-stena.jpg",
+    "source_w": 3024,
+    "source_h": 4032,
+    "variants": [
+      {
+        "w": 560,
+        "h": 747,
+        "path": "img/galerie/09-tv-knihovni-stena-w560.webp",
+        "bytes": 65230
+      },
+      {
+        "w": 1100,
+        "h": 1467,
+        "path": "img/galerie/09-tv-knihovni-stena-w1100.webp",
+        "bytes": 191058
+      },
+      {
+        "w": 1920,
+        "h": 2560,
+        "path": "img/galerie/09-tv-knihovni-stena-w1920.webp",
+        "bytes": 454694
+      }
+    ],
+    "fallback": {
+      "w": 1100,
+      "h": 1467,
+      "path": "img/galerie/09-tv-knihovni-stena-w1100.jpg",
+      "bytes": 295655
+    }
+  }
+]

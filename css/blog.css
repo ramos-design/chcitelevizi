@@ -410,7 +410,7 @@
   flex-wrap: wrap;
   padding: 1.2rem 0 2.2rem;
 }
-.admin-topbar .nav-logo { font-size: 1.05rem; }
+.admin-topbar .nav-logo img { height: 30px; }
 .admin-topbar-actions {
   display: flex;
   align-items: center;

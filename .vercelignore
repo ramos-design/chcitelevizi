@@ -1,0 +1,8 @@
+# Originály fotek a build skripty se na server neposílají – nasazují se
+# jen hotové odvozeniny v img/. Rebuild se dělá lokálně:
+#   python3 tools/build-gallery.py && python3 tools/patch-gallery-html.py
+assets-src/
+tools/
+
+# Stará verze stránky, není routovaná
+chcitelevizi.html

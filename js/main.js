@@ -49,6 +49,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ── NAV "VÍCE" DROPDOWN ── */
+  const navMore = document.querySelector('.nav-more');
+
+  if (navMore) {
+    const moreBtn  = navMore.querySelector('.nav-more-btn');
+    const moreMenu = navMore.querySelector('.nav-more-menu');
+    let hoverTimer;
+
+    const setMore = (open) => {
+      clearTimeout(hoverTimer);
+      navMore.classList.toggle('open', open);
+      moreBtn.setAttribute('aria-expanded', String(open));
+    };
+
+    const canHover = window.matchMedia('(hover: hover)').matches;
+
+    moreBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Na myši už menu otevřel hover — klik ho nesmí hned zavřít
+      setMore(canHover ? true : !navMore.classList.contains('open'));
+    });
+
+    // Otevření hoverem jen na zařízeních s myší
+    if (canHover) {
+      navMore.addEventListener('mouseenter', () => setMore(true));
+      navMore.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => setMore(false), 160);
+      });
+    }
+
+    moreMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMore(false));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navMore.contains(e.target)) setMore(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !navMore.classList.contains('open')) return;
+      setMore(false);
+      moreBtn.focus();
+    });
+
+    // Zavřít při odscrollování mimo
+    window.addEventListener('scroll', () => {
+      if (navMore.classList.contains('open')) setMore(false);
+    }, { passive: true });
+  }
+
   /* ── SMOOTH SCROLL FOR ANCHOR LINKS ── */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
@@ -58,8 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!target) return;
       e.preventDefault();
 
-      const navH = navbar ? navbar.offsetHeight : 72;
-      const top  = target.getBoundingClientRect().top + window.scrollY - navH;
+      // navbar plave 16px pod horní hranou – počítáme s jeho skutečným spodním okrajem
+      const navBottom = navbar ? navbar.getBoundingClientRect().bottom : 84;
+      const top = target.getBoundingClientRect().top + window.scrollY - navBottom - 12;
 
       window.scrollTo({ top, behavior: 'smooth' });
     });
@@ -153,17 +205,42 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxInner.innerHTML = '';
 
     if (media.tagName.toLowerCase() === 'img') {
+      const thumbSrc = media.currentSrc || media.src;
+      const fullSrc  = media.dataset.full || thumbSrc;
+      const fallback = media.dataset.fullFallback || '';
+
+      const natW = parseInt(media.dataset.fullW, 10) || media.naturalWidth  || 0;
+      const natH = parseInt(media.dataset.fullH, 10) || media.naturalHeight || 0;
+
       const full = document.createElement('img');
-      full.src = media.currentSrc || media.src;
       full.alt = media.alt || '';
+      full.decoding = 'async';
 
-      // Náhled se roztahuje podle šířky (na šířku) nebo výšky (na výšku),
-      // aby se v obou případech vešel a nezdeformoval se
-      const w = media.naturalWidth  || parseInt(media.getAttribute('width'), 10)  || 0;
-      const h = media.naturalHeight || parseInt(media.getAttribute('height'), 10) || 0;
-      if (h > w) full.classList.add('is-portrait');
+      // Fotku nikdy nezvětšujeme nad její skutečné rozlišení – jinak ji prohlížeč
+      // interpoluje a výsledek je rozmazaný. Limity v CSS berou tyhle hodnoty jako strop.
+      if (natW) full.style.setProperty('--nat-w', natW + 'px');
+      if (natH) full.style.setProperty('--nat-h', natH + 'px');
+      if (natH > natW) full.classList.add('is-portrait');
 
+      // Nejdřív ukážeme náhled (je už v cache, takže se objeví okamžitě)
+      // a plnou verzi vyměníme, jakmile doteče.
+      full.src = thumbSrc;
       lightboxInner.appendChild(full);
+
+      if (fullSrc !== thumbSrc) {
+        lightboxInner.classList.add('is-loading');
+        const hi = new Image();
+        hi.decoding = 'async';
+        hi.onload  = () => {
+          full.src = hi.src;
+          lightboxInner.classList.remove('is-loading');
+        };
+        hi.onerror = () => {
+          if (fallback && hi.src.indexOf(fallback) === -1) { hi.src = fallback; return; }
+          lightboxInner.classList.remove('is-loading');
+        };
+        hi.src = fullSrc;
+      }
 
       const caption = item.querySelector('.gallery-caption');
       if (caption) {
@@ -187,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!lightbox) return;
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
+    lightboxInner && lightboxInner.classList.remove('is-loading');
     lightboxInner && (lightboxInner.innerHTML = '');
   };
 
@@ -451,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── ACTIVE NAV LINK HIGHLIGHT ── */
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
+  const navLinks = document.querySelectorAll('.nav-links a, .nav-more-menu a, .mobile-menu a');
 
   const highlightNav = () => {
     const scrollY = window.scrollY + 120;

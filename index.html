@@ -15,10 +15,10 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/main.css?v=3">
-  <link rel="stylesheet" href="css/components.css?v=3">
-  <link rel="stylesheet" href="css/blog.css?v=3">
-  <link rel="stylesheet" href="css/responsive.css?v=3">
+  <link rel="stylesheet" href="css/main.css?v=4">
+  <link rel="stylesheet" href="css/components.css?v=4">
+  <link rel="stylesheet" href="css/blog.css?v=4">
+  <link rel="stylesheet" href="css/responsive.css?v=4">
 </head>
 
 <body>
@@ -26,16 +26,21 @@
 
   <!-- ═══════════ NAV ═══════════ -->
   <nav id="navbar">
-    <a href="#" class="nav-logo">CHCI<span>TELEVIZI</span>.cz</a>
+    <a href="#" class="nav-logo" aria-label="CHCITELEVIZI.cz"><img src="img/chcitv-logo.svg" alt="CHCITELEVIZI.cz" width="807" height="260"></a>
     <ul class="nav-links">
-      <li><a href="#o-nas">O nás</a></li>
       <li><a href="#jak-to-funguje">Jak to funguje</a></li>
-      <li><a href="#poradenstvi">Poradenství</a></li>
       <li><a href="#tarify">Tarify</a></li>
+      <li><a href="#poradenstvi">Poradenství</a></li>
       <li><a href="#recenze">Recenze</a></li>
       <li><a href="blog.html">Blog</a></li>
-      <li><a href="#faq">Dotazy</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+      <li class="nav-more">
+        <button type="button" class="nav-more-btn" aria-expanded="false" aria-haspopup="true" aria-controls="navMoreMenu">Více<svg class="nav-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <ul class="nav-more-menu" id="navMoreMenu">
+          <li><a href="#o-nas">O nás</a></li>
+          <li><a href="#faq">Časté dotazy</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </li>
     </ul>
     <a href="tel:+420777660900" class="nav-phone" aria-label="Zavolat na +420 777 660 900"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span>+420 777 660 900</span></a>
     <a href="#kontakt" class="nav-cta">Objednat instalaci</a>
@@ -637,114 +642,169 @@
         domácnostech a kancelářích.</p>
     </div>
     <div class="gallery-grid reveal">
-
-      <div class="gallery-item" data-index="0" role="button" tabindex="0" aria-label="Otevřít: Domácí kino s prostorovým ozvučením">
+      <div class="gallery-item gs-3" data-index="0" role="button" tabindex="0" aria-label="Otevřít: Velkoformátová OLED televize na zdi nad závěsnou dřevěnou komodou">
         <div class="gallery-item-inner">
-          <img src="img/galerie/01-domaci-kino.jpg" alt="Domácí kino s prostorovým ozvučením" width="480" height="360" decoding="async">
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-caption">🎬 Domácí kino s prostorovým ozvučením</div>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-index="1" role="button" tabindex="0" aria-label="Otevřít: Televize na zdi se soundbarem">
-        <div class="gallery-item-inner">
-          <img src="img/galerie/02-tv-se-soundbarem.jpg" alt="Televize na zdi se soundbarem" width="480" height="360" decoding="async">
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-caption">📺 Montáž na zeď se soundbarem</div>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-index="2" role="button" tabindex="0" aria-label="Otevřít: OLED televize nad závěsnou komodou">
-        <div class="gallery-item-inner">
-          <img src="img/galerie/03-oled-zavesna-komoda.jpg" alt="OLED televize nad závěsnou komodou" width="480" height="360" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/07-oled-zavesna-komoda-w560.webp 560w, img/galerie/07-oled-zavesna-komoda-w1100.webp 1100w, img/galerie/07-oled-zavesna-komoda-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, (min-width: 1400px) 326px, 22.5vw">
+            <img src="img/galerie/07-oled-zavesna-komoda-w1100.jpg"
+                 data-full="img/galerie/07-oled-zavesna-komoda-w1920.webp" data-full-fallback="img/galerie/07-oled-zavesna-komoda-w1100.jpg"
+                 data-full-w="1920" data-full-h="1440"
+                 alt="Velkoformátová OLED televize na zdi nad závěsnou dřevěnou komodou" width="1100" height="825"
+                 loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="gallery-overlay">
           <div class="gallery-caption">✨ OLED nad závěsnou komodou – čistý interiér</div>
         </div>
       </div>
 
-      <div class="gallery-item" data-index="3" role="button" tabindex="0" aria-label="Otevřít: Televize na mobilním stojanu u okna">
+      <div class="gallery-item gs-5" data-index="1" role="button" tabindex="0" aria-label="Otevřít: Televize zapuštěná do dřevěné lamelové stěny v obývacím pokoji">
         <div class="gallery-item-inner">
-          <img src="img/galerie/04-tv-stojan.jpg" alt="Televize na mobilním stojanu u okna" width="360" height="480" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-caption">🧭 TV na mobilním stojanu u okna</div>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-index="4" role="button" tabindex="0" aria-label="Otevřít: Televize na zdi s tapetou, kabeláž skrytá ve zdi">
-        <div class="gallery-item-inner">
-          <img src="img/galerie/05-tv-na-tapete.jpg" alt="Televize na zdi s tapetou, kabeláž skrytá ve zdi" width="480" height="360" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-caption">🧩 Montáž na tapetu – bez viditelné kabeláže</div>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-index="5" role="button" tabindex="0" aria-label="Otevřít: TV se sloupovými reproduktory a centrálním kanálem">
-        <div class="gallery-item-inner">
-          <img src="img/galerie/06-sloupove-reproduktory.jpg" alt="TV se sloupovými reproduktory a centrálním kanálem" width="480" height="360" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-caption">🔊 Sloupové reproduktory a centrální kanál</div>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-index="6" role="button" tabindex="0" aria-label="Otevřít: Televize zapuštěná do dřevěné lamelové stěny">
-        <div class="gallery-item-inner">
-          <img src="img/galerie/07-lamelova-stena.jpg" alt="Televize zapuštěná do dřevěné lamelové stěny" width="540" height="360" loading="lazy" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/01-lamelova-stena-obyvak-w560.webp 560w, img/galerie/01-lamelova-stena-obyvak-w1100.webp 1100w, img/galerie/01-lamelova-stena-obyvak-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, (min-width: 1400px) 551px, 37.5vw">
+            <img src="img/galerie/01-lamelova-stena-obyvak-w1100.jpg"
+                 data-full="img/galerie/01-lamelova-stena-obyvak-w1920.webp" data-full-fallback="img/galerie/01-lamelova-stena-obyvak-w1100.jpg"
+                 data-full-w="1920" data-full-h="1282"
+                 alt="Televize zapuštěná do dřevěné lamelové stěny v obývacím pokoji" width="1100" height="735"
+                 loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="gallery-overlay">
           <div class="gallery-caption">🪵 TV v dřevěné lamelové stěně</div>
         </div>
       </div>
 
-      <div class="gallery-item" data-index="7" role="button" tabindex="0" aria-label="Otevřít: Televize na designovém stojanu v obývacím pokoji">
+      <div class="gallery-item gs-4" data-index="2" role="button" tabindex="0" aria-label="Otevřít: Televize na pohledovém betonu se sloupovými reproduktory a zesilovači">
         <div class="gallery-item-inner">
-          <img src="img/galerie/08-tv-stojan-obyvak.jpg" alt="Televize na designovém stojanu v obývacím pokoji" width="480" height="360" loading="lazy" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/08-hifi-pohledovy-beton-w560.webp 560w, img/galerie/08-hifi-pohledovy-beton-w1100.webp 1100w, img/galerie/08-hifi-pohledovy-beton-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 90vw, (min-width: 1400px) 439px, 30.0vw">
+            <img src="img/galerie/08-hifi-pohledovy-beton-w1100.jpg"
+                 data-full="img/galerie/08-hifi-pohledovy-beton-w1920.webp" data-full-fallback="img/galerie/08-hifi-pohledovy-beton-w1100.jpg"
+                 data-full-w="1920" data-full-h="1440"
+                 alt="Televize na pohledovém betonu se sloupovými reproduktory a zesilovači" width="1100" height="825"
+                 loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="gallery-overlay">
-          <div class="gallery-caption">🖼️ Televize na designovém stojanu</div>
+          <div class="gallery-caption">🏛️ Hi-fi sestava na pohledovém betonu</div>
         </div>
       </div>
 
-      <div class="gallery-item" data-index="8" role="button" tabindex="0" aria-label="Otevřít: Televize na zdi a AV rack s komponenty">
+      <div class="gallery-item gs-5" data-index="3" role="button" tabindex="0" aria-label="Otevřít: Domácí kino s televizí na zdi, gramofonem, centrálním kanálem a subwooferem">
         <div class="gallery-item-inner">
-          <img src="img/galerie/09-av-rack.jpg" alt="Televize na zdi a AV rack s komponenty" width="480" height="360" loading="lazy" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/05-domaci-kino-gramofon-w560.webp 560w, img/galerie/05-domaci-kino-gramofon-w1100.webp 1100w, img/galerie/05-domaci-kino-gramofon-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, (min-width: 1400px) 551px, 37.5vw">
+            <img src="img/galerie/05-domaci-kino-gramofon-w1100.jpg"
+                 data-full="img/galerie/05-domaci-kino-gramofon-w1920.webp" data-full-fallback="img/galerie/05-domaci-kino-gramofon-w1100.jpg"
+                 data-full-w="1920" data-full-h="1440"
+                 alt="Domácí kino s televizí na zdi, gramofonem, centrálním kanálem a subwooferem" width="1100" height="825"
+                 loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="gallery-overlay">
-          <div class="gallery-caption">🎚️ Montáž na zeď + AV rack s komponenty</div>
+          <div class="gallery-caption">🎬 Domácí kino s gramofonem a subwooferem</div>
         </div>
       </div>
 
-      <div class="gallery-item" data-index="9" role="button" tabindex="0" aria-label="Otevřít: Televize na zdi se zesilovačem na polici">
+      <div class="gallery-item gs-7" data-index="4" role="button" tabindex="0" aria-label="Otevřít: Televize na komodě se sloupovými reproduktory KEF a centrálním kanálem">
         <div class="gallery-item-inner">
-          <img src="img/galerie/10-tv-se-zesilovacem.jpg" alt="Televize na zdi se zesilovačem na polici" width="360" height="480" loading="lazy" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/10-kef-sestava-obyvak-w560.webp 560w, img/galerie/10-kef-sestava-obyvak-w1100.webp 1100w, img/galerie/10-kef-sestava-obyvak-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, (min-width: 1400px) 777px, 52.5vw">
+            <img src="img/galerie/10-kef-sestava-obyvak-w1100.jpg"
+                 data-full="img/galerie/10-kef-sestava-obyvak-w1920.webp" data-full-fallback="img/galerie/10-kef-sestava-obyvak-w1100.jpg"
+                 data-full-w="1920" data-full-h="1440"
+                 alt="Televize na komodě se sloupovými reproduktory KEF a centrálním kanálem" width="1100" height="825"
+                 loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="gallery-overlay">
-          <div class="gallery-caption">⚙️ TV na zdi se zesilovačem a policí</div>
+          <div class="gallery-caption">🔊 Sestava KEF s centrálním kanálem</div>
         </div>
       </div>
 
-      <div class="gallery-item" data-index="10" role="button" tabindex="0" aria-label="Otevřít: Televize v ložnici na lamelové stěně">
+      <div class="gallery-item gs-3" data-index="5" role="button" tabindex="0" aria-label="Otevřít: Televize na zdi s tapetou, kabeláž skrytá ve zdi, hi-fi zesilovač a gramofon">
         <div class="gallery-item-inner">
-          <img src="img/galerie/11-tv-loznice.jpg" alt="Televize v ložnici na lamelové stěně" width="540" height="360" loading="lazy" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/06-tv-na-tapete-w560.webp 560w, img/galerie/06-tv-na-tapete-w1100.webp 1100w, img/galerie/06-tv-na-tapete-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 90vw, (min-width: 1400px) 326px, 22.5vw">
+            <img src="img/galerie/06-tv-na-tapete-w1100.jpg"
+                 data-full="img/galerie/06-tv-na-tapete-w1920.webp" data-full-fallback="img/galerie/06-tv-na-tapete-w1100.jpg"
+                 data-full-w="1920" data-full-h="1440"
+                 alt="Televize na zdi s tapetou, kabeláž skrytá ve zdi, hi-fi zesilovač a gramofon" width="1100" height="825"
+                 loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">🧩 Montáž na tapetu – bez viditelné kabeláže</div>
+        </div>
+      </div>
+
+      <div class="gallery-item gs-5" data-index="6" role="button" tabindex="0" aria-label="Otevřít: Televize v ložnici na dřevěné lamelové stěně">
+        <div class="gallery-item-inner">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/02-tv-loznice-lamely-w560.webp 560w, img/galerie/02-tv-loznice-lamely-w1100.webp 1100w, img/galerie/02-tv-loznice-lamely-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, (min-width: 1400px) 551px, 37.5vw">
+            <img src="img/galerie/02-tv-loznice-lamely-w1100.jpg"
+                 data-full="img/galerie/02-tv-loznice-lamely-w1920.webp" data-full-fallback="img/galerie/02-tv-loznice-lamely-w1100.jpg"
+                 data-full-w="1920" data-full-h="1282"
+                 alt="Televize v ložnici na dřevěné lamelové stěně" width="1100" height="735"
+                 loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="gallery-overlay">
           <div class="gallery-caption">🛏️ Televize v ložnici na lamelové stěně</div>
         </div>
       </div>
 
-      <div class="gallery-item" data-index="11" role="button" tabindex="0" aria-label="Otevřít: Hi-fi sestava s televizí na pohledovém betonu">
+      <div class="gallery-item gs-4" data-index="7" role="button" tabindex="0" aria-label="Otevřít: Televize na mobilním stojanu u prosklené stěny s výhledem">
         <div class="gallery-item-inner">
-          <img src="img/galerie/12-hifi-beton.jpg" alt="Hi-fi sestava s televizí na pohledovém betonu" width="480" height="360" loading="lazy" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/03-tv-stojan-u-okna-w560.webp 560w, img/galerie/03-tv-stojan-u-okna-w1100.webp 1100w, img/galerie/03-tv-stojan-u-okna-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, (min-width: 1400px) 439px, 30.0vw">
+            <img src="img/galerie/03-tv-stojan-u-okna-w1100.jpg"
+                 data-full="img/galerie/03-tv-stojan-u-okna-w1920.webp" data-full-fallback="img/galerie/03-tv-stojan-u-okna-w1100.jpg"
+                 data-full-w="1920" data-full-h="1440"
+                 alt="Televize na mobilním stojanu u prosklené stěny s výhledem" width="1100" height="825"
+                 loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="gallery-overlay">
-          <div class="gallery-caption">🏛️ Hi-fi sestava na pohledovém betonu</div>
+          <div class="gallery-caption">🧭 TV na mobilním stojanu u okna</div>
         </div>
       </div>
+
+      <div class="gallery-item gs-7" data-index="8" role="button" tabindex="0" aria-label="Otevřít: Televize v obývací stěně se sloupovými reproduktory a AV rackem">
+        <div class="gallery-item-inner">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/04-hifi-sloupove-reproduktory-w560.webp 560w, img/galerie/04-hifi-sloupove-reproduktory-w1100.webp 1100w, img/galerie/04-hifi-sloupove-reproduktory-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 90vw, (min-width: 1400px) 777px, 52.5vw">
+            <img src="img/galerie/04-hifi-sloupove-reproduktory-w1100.jpg"
+                 data-full="img/galerie/04-hifi-sloupove-reproduktory-w1920.webp" data-full-fallback="img/galerie/04-hifi-sloupove-reproduktory-w1100.jpg"
+                 data-full-w="1920" data-full-h="1440"
+                 alt="Televize v obývací stěně se sloupovými reproduktory a AV rackem" width="1100" height="825"
+                 loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">🔊 Sloupové reproduktory a AV rack</div>
+        </div>
+      </div>
+
+      <div class="gallery-item gs-5 is-portrait-src" data-index="9" role="button" tabindex="0" aria-label="Otevřít: Televize v knihovní stěně s bílou AV komodou a gramofonem">
+        <div class="gallery-item-inner">
+          <picture>
+            <source type="image/webp" srcset="img/galerie/09-tv-knihovni-stena-w560.webp 560w, img/galerie/09-tv-knihovni-stena-w1100.webp 1100w, img/galerie/09-tv-knihovni-stena-w1920.webp 1920w" sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, (min-width: 1400px) 551px, 37.5vw">
+            <img src="img/galerie/09-tv-knihovni-stena-w1100.jpg"
+                 data-full="img/galerie/09-tv-knihovni-stena-w1920.webp" data-full-fallback="img/galerie/09-tv-knihovni-stena-w1100.jpg"
+                 data-full-w="1920" data-full-h="2560"
+                 alt="Televize v knihovní stěně s bílou AV komodou a gramofonem" width="1100" height="1467"
+                 loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">📚 Televize v knihovní stěně s AV komodou</div>
+        </div>
+      </div>
+
+
+
+
 
     </div>
   </section>
@@ -1025,7 +1085,7 @@
 
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
-    <a href="#" class="footer-logo">CHCI<span>TELEVIZI</span>.cz</a>
+    <a href="#" class="footer-logo" aria-label="CHCITELEVIZI.cz"><img src="img/chcitv-logo-white.svg" alt="CHCITELEVIZI.cz" width="807" height="260"></a>
     <div class="footer-links">
       <a href="#o-nas">O nás</a>
       <a href="#jak-to-funguje">Jak to funguje</a>
@@ -1069,7 +1129,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/cms.js"></script>
   <script src="js/animations.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=4"></script>
   <script src="js/pruvodce.js"></script>
 </body>
 

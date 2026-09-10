@@ -786,13 +786,16 @@
   margin-top: 4rem;
 }
 
-/* Mozaika se opakuje po šesticích, takže zvládne libovolný počet fotek */
-.gallery-item:nth-child(6n + 1) { grid-column: span 5; }
-.gallery-item:nth-child(6n + 2) { grid-column: span 3; }
-.gallery-item:nth-child(6n + 3) { grid-column: span 4; }
-.gallery-item:nth-child(6n + 4) { grid-column: span 3; }
-.gallery-item:nth-child(6n + 5) { grid-column: span 5; }
-.gallery-item:nth-child(6n + 6) { grid-column: span 4; }
+/* Šířku dlaždice určuje třída gs-*, kterou dopočítá tools/patch-gallery-html.py
+   tak, aby každá řada přesně vyplnila 12 sloupců – galerie nikdy nekončí
+   osamocenou dlaždicí v poloprázdné řadě. */
+.gallery-item.gs-3  { grid-column: span 3; }
+.gallery-item.gs-4  { grid-column: span 4; }
+.gallery-item.gs-5  { grid-column: span 5; }
+.gallery-item.gs-6  { grid-column: span 6; }
+.gallery-item.gs-7  { grid-column: span 7; }
+.gallery-item.gs-8  { grid-column: span 8; }
+.gallery-item.gs-12 { grid-column: span 12; }
 
 .gallery-item {
   border-radius: 16px;
@@ -877,15 +880,25 @@
 }
 /* Náhled fotky. Rozměr řídí jen jedna osa (druhá je auto), takže se poměr stran
    nikdy nezlomí; limity 88vw / 86vh jsou přepočtené i na druhou osu, aby se
-   fotka vešla do okna bez dalšího max-*, které by ji zdeformovalo. */
+   fotka vešla do okna bez dalšího max-*, které by ji zdeformovalo.
+   --nat-w / --nat-h nastavuje JS podle skutečného rozlišení souboru – fotka se
+   tak nikdy nenatáhne nad svoje pixely a zůstane ostrá. */
 .lightbox-inner img {
   display: block;
-  width: min(920px, 88vw, 114vh);   /* 114vh ≈ 86vh × 4/3 pro fotky na šířku */
+  width: min(var(--nat-w, 920px), 920px, 88vw, 114vh);   /* 114vh ≈ 86vh × 4/3 pro fotky na šířku */
   height: auto;
 }
 .lightbox-inner img.is-portrait {
   width: auto;
-  height: min(800px, 86vh, 117vw);  /* 117vw ≈ 88vw × 4/3 pro fotky na výšku */
+  height: min(var(--nat-h, 800px), 800px, 86vh, 117vw);  /* 117vw ≈ 88vw × 4/3 pro fotky na výšku */
+}
+/* Dokud se načítá plná verze, drží se v okně zvětšený náhled – jemné rozostření
+   je méně rušivé než ostré artefakty z upscalu. */
+.lightbox-inner.is-loading img {
+  filter: blur(6px);
+}
+.lightbox-inner img {
+  transition: filter .25s ease-out;
 }
 .lightbox-caption {
   position: absolute;
