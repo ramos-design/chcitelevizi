@@ -36,9 +36,57 @@ function isSafePath(targetPath) {
   return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
 }
 
+// Lokální tajné klíče (RESEND_API_KEY…); na Vercelu jsou v Environment Variables
+try {
+  process.loadEnvFile(path.join(ROOT_DIR, '.env'));
+} catch {
+  // .env není povinný
+}
+
+// /api/<name> -> api/<name>.js (stejné chování jako Vercel Functions)
+function handleApi(req, res, pathname) {
+  const name = pathname.slice('/api/'.length);
+  if (!/^[a-z0-9-]+$/i.test(name)) {
+    send(res, 404, 'Not Found');
+    return;
+  }
+  const modulePath = path.join(ROOT_DIR, 'api', `${name}.js`);
+  if (!fs.existsSync(modulePath)) {
+    send(res, 404, 'Not Found');
+    return;
+  }
+
+  const chunks = [];
+  let size = 0;
+  req.on('data', (chunk) => {
+    size += chunk.length;
+    if (size > 100 * 1024) req.destroy();
+    else chunks.push(chunk);
+  });
+  req.on('end', async () => {
+    const raw = Buffer.concat(chunks).toString('utf8');
+    try {
+      req.body = raw && (req.headers['content-type'] || '').includes('application/json') ? JSON.parse(raw) : raw;
+    } catch {
+      req.body = raw;
+    }
+    try {
+      await require(modulePath)(req, res);
+    } catch (err) {
+      console.error(err);
+      if (!res.headersSent) send(res, 500, 'Internal Server Error');
+    }
+  });
+}
+
 const server = http.createServer((req, res) => {
   const rawUrl = req.url || '/';
   const pathname = decodeURIComponent(rawUrl.split('?')[0]);
+
+  if (pathname.startsWith('/api/')) {
+    handleApi(req, res, pathname);
+    return;
+  }
   const requestedPath = pathname === '/' ? '/index.html' : pathname;
 
   const filePath = path.resolve(ROOT_DIR, `.${requestedPath}`);

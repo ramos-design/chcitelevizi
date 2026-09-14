@@ -1078,6 +1078,12 @@
         <span>Souhlasím se zpracováním osobních údajů pro účely vyřízení poptávky.</span>
       </label>
 
+      <!-- Ochrana proti spamu: skryté pole, vyplňují jen roboti -->
+      <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+        <label for="web">Web</label>
+        <input type="text" id="web" name="web" tabindex="-1" autocomplete="off">
+      </div>
+
       <button type="submit" class="form-submit">Odeslat poptávku →</button>
       <p class="form-note">Odesláním vás k ničemu nezavazujeme. Cenu potvrdíme až po konzultaci.</p>
     </form>

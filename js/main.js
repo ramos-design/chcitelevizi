@@ -352,29 +352,73 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Simulace odeslání
+      // Odeslání na /api/poptavka (Resend)
       const submitBtn = form.querySelector('.form-submit');
+      if (submitBtn && submitBtn.disabled) return;
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Odesílám...';
+        submitBtn.style.background = '';
       }
 
-      setTimeout(() => {
-        form.reset();
-        if (tarifChoice) tarifChoice.classList.remove('has-error');
-        if (gdprWrap) gdprWrap.classList.remove('has-error');
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = '✓ Odesláno! Ozveme se do 2 hodin.';
-          submitBtn.style.background = 'var(--green)';
-        }
-        setTimeout(() => {
+      // Stejné ID při opakovaném pokusu → Resend nepošle e-mail dvakrát
+      if (!form.dataset.submissionId) {
+        form.dataset.submissionId = (window.crypto && crypto.randomUUID)
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      }
+
+      const fd = new FormData(form);
+      const payload = {
+        id: form.dataset.submissionId,
+        tarif: fd.get('tarif') || '',
+        jmeno: fd.get('jmeno') || '',
+        prijmeni: fd.get('prijmeni') || '',
+        telefon: fd.get('telefon') || '',
+        email: fd.get('email') || '',
+        lokalita: fd.get('lokalita') || '',
+        kontaktZpusob: fd.get('kontaktZpusob') || '',
+        poznamka: fd.get('poznamka') || '',
+        gdpr: gdpr ? gdpr.checked : true,
+        web: fd.get('web') || '',
+      };
+
+      const resetBtn = (delay) => setTimeout(() => {
+        if (!submitBtn) return;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Odeslat poptávku →';
+        submitBtn.style.background = '';
+      }, delay);
+
+      fetch('/api/poptavka', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(async (res) => {
+          const json = await res.json().catch(() => ({}));
+          if (!res.ok || !json.ok) throw new Error(json.error || 'Odeslání se nepodařilo.');
+        })
+        .then(() => {
+          form.reset();
+          delete form.dataset.submissionId;
+          if (tarifChoice) tarifChoice.classList.remove('has-error');
+          if (gdprWrap) gdprWrap.classList.remove('has-error');
           if (submitBtn) {
-            submitBtn.textContent = 'Odeslat poptávku →';
-            submitBtn.style.background = '';
+            submitBtn.textContent = '✓ Odesláno! Ozveme se do 2 hodin.';
+            submitBtn.style.background = 'var(--green)';
           }
-        }, 4000);
-      }, 1200);
+          resetBtn(5000);
+        })
+        .catch((err) => {
+          console.error('[poptavka]', err);
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Nepodařilo se odeslat – zkusit znovu';
+            submitBtn.style.background = 'var(--red)';
+          }
+          alert(`${err.message}\n\nPřípadně nám zavolejte na +420 777 660 900.`);
+        });
     });
 
     // Chybové zvýraznění zmizí, jakmile uživatel začne opravovat

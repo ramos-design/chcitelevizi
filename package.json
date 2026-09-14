@@ -6,5 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js"
+  },
+  "dependencies": {
+    "resend": "^6.28.0"
   }
 }

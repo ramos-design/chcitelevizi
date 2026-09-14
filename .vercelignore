@@ -6,3 +6,7 @@ tools/
 
 # Stará verze stránky, není routovaná
 chcitelevizi.html
+
+# Tajné klíče (na Vercelu jsou v Environment Variables)
+.env
+.env.*
