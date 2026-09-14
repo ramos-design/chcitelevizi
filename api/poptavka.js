@@ -43,11 +43,11 @@ async function withRetry(call, attempts = 3) {
 
 // Příjemci notifikace se spravují v Resendu (Audience → Segments).
 // Odhlášený kontakt (Unsubscribed) notifikace nedostává – dá se tak dočasně vypnout.
-async function getTeamRecipients(resend) {
-  const segmentId = process.env.POPTAVKA_SEGMENT_ID;
-  if (!segmentId) return TEAM_TO;
+// Segment „Příjemci poptávek – chcitelevizi“ (ID není tajné, env ho jen může přepsat)
+const SEGMENT_ID = process.env.POPTAVKA_SEGMENT_ID || '47292289-cea2-4d27-8e3f-34a6d132e1a1';
 
-  const { data, error } = await withRetry(() => resend.contacts.list({ segmentId, limit: 50 }));
+async function getTeamRecipients(resend) {
+  const { data, error } = await withRetry(() => resend.contacts.list({ segmentId: SEGMENT_ID, limit: 50 }));
   if (error) {
     console.error('[poptavka] Nelze načíst příjemce ze segmentu, použije se POPTAVKA_TO:', error);
     return TEAM_TO;
@@ -55,7 +55,13 @@ async function getTeamRecipients(resend) {
   const emails = ((data && data.data) || [])
     .filter((contact) => !contact.unsubscribed && EMAIL_RE.test(contact.email))
     .map((contact) => contact.email);
-  return emails.length ? emails : TEAM_TO;
+
+  if (!emails.length) {
+    console.warn('[poptavka] Segment je prázdný, použije se POPTAVKA_TO:', TEAM_TO.join(', '));
+    return TEAM_TO;
+  }
+  console.log('[poptavka] Příjemci ze segmentu:', emails.join(', '));
+  return emails;
 }
 
 function clean(value, max, multiline) {
