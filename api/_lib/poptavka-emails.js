@@ -129,13 +129,13 @@ function detailRows(rows) {
 /* ═══ Potvrzení zákazníkovi ═══ */
 function buildCustomerEmail(d, ctx) {
   const tarif = parseTarif(d.tarif);
-  const subject = 'Poptávku máme – ozveme se do 2 hodin | Chci televizi';
-  const preheader = 'Děkujeme za důvěru. Technik se vám ozve do 2 hodin v pracovní době.';
+  const subject = 'Poptávku máme – ozveme se do 24 hodin | Chci televizi';
+  const preheader = 'Děkujeme za důvěru. Ozveme se vám do 24 hodin.';
 
   const tarifBadge = `<span style="display:inline-block;padding:3px 10px;border-radius:999px;background:${C.tint};color:${C.accentInk};font-weight:700;font-size:14px;">${esc(tarif.name)}</span>${tarif.price ? `<span style="color:${C.mid};font-size:14px;">&nbsp;&nbsp;${esc(tarif.price)}</span>` : ''}`;
 
   const steps = [
-    ['Ozveme se vám', `Do 2 hodin v pracovní době (${OPENING_HOURS}) probereme detaily a zodpovíme vaše dotazy.`],
+    ['Ozveme se vám', 'Do 24 hodin probereme detaily a zodpovíme vaše dotazy.'],
     ['Domluvíme termín a cenu', 'Vše víte dopředu – žádné skryté poplatky a nic neplatíte předem.'],
     ['Postaráme se o zbytek', 'Od doporučení správné televize přes montáž na zeď až po nastavení všech aplikací.'],
   ];
@@ -157,7 +157,7 @@ function buildCustomerEmail(d, ctx) {
       <td class="px" style="padding:28px 40px 0;font-family:${FONT};">
         <div style="font-size:12px;line-height:16px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:${C.accentInk};">✓&nbsp; Poptávka přijata</div>
         <h1 class="h1" style="margin:10px 0 0;font-size:30px;line-height:36px;font-weight:800;color:${C.black};letter-spacing:-0.5px;">Děkujeme, ${esc(d.jmeno)}!</h1>
-        <p style="margin:14px 0 0;font-size:16px;line-height:25px;color:${C.black};">Vaši poptávku jsme v pořádku přijali. Do 2 hodin v pracovní době ${contactPromise(d)}.</p>
+        <p style="margin:14px 0 0;font-size:16px;line-height:25px;color:${C.black};">Vaši poptávku jsme v pořádku přijali. Do 24 hodin ${contactPromise(d)}.</p>
       </td>
     </tr>
 
@@ -231,7 +231,7 @@ function buildCustomerEmail(d, ctx) {
   const text = [
     `Děkujeme, ${d.jmeno}!`,
     '',
-    'Vaši poptávku jsme v pořádku přijali. Ozveme se vám do 2 hodin v pracovní době.',
+    'Vaši poptávku jsme v pořádku přijali. Ozveme se vám do 24 hodin.',
     '',
     'SHRNUTÍ POPTÁVKY',
     `Služba: ${d.tarif}`,

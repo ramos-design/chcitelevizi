@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (tarifChoice) tarifChoice.classList.remove('has-error');
           if (gdprWrap) gdprWrap.classList.remove('has-error');
           if (submitBtn) {
-            submitBtn.textContent = '✓ Odesláno! Ozveme se do 2 hodin.';
+            submitBtn.textContent = '✓ Odesláno! Ozveme se do 24 hodin.';
             submitBtn.style.background = 'var(--green)';
           }
           resetBtn(5000);
